@@ -17,7 +17,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 
 **To:** [Add Name here and remove brackets]
 
-**From:**[Add Team Members names here and remove brackets ]
+**From:**Samson Joseph
 
 **Subject:** [Add Subject here and remove brackets]
 
