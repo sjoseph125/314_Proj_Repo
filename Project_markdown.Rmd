@@ -6,7 +6,7 @@ output: html_notebook jj
 
 ---
 ## Delete lines 8 - 16 section before submitting the file
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to use as a template for your Unit Project 1. 
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to use as a template for your Unit Project 1. Christopher
 
 Add new chunks by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
