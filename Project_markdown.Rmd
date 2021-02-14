@@ -52,7 +52,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 
 
 
-### Analysis 3: Two Categorical Variables
+### Analysis 3: Two Categorical Variables Joey
 #### Analyst:[Name of Team Member]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
