@@ -25,6 +25,12 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Background
 [Remove this text and replace with:  Provide a brief (one paragraph, please!) background description of 1) your task and 2) the context of your analysis. The context of your analysis should include: origin of dataset (if applicable), population of interest, data collection method, size of the data set, and a table of variables/factors to be explored with an explanation of what they mean and what type of variables they are.]
 
+## Loading Dataset
+```{r}
+vg_sales <- read.csv('video_games_sales_1985_2016.csv')
+attach(vg_sales)
+```
+
 
 ## Data Analyses
 
