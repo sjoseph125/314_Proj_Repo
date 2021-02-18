@@ -2,7 +2,7 @@
 title: '[Unit 1 Project Template/Name your project here]'
 authors: '[Team Number and Names]'
 date: 
-output: html_notebook jj
+output: html_notebook
 
 ---
 ## Delete lines 8 - 16 section before submitting the file
