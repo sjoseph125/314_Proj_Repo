@@ -28,7 +28,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Loading Dataset
 ```{r}
 vg_sales <- read.csv('video_games_sales_1985_2016.csv')
-attach(vg_salespl)
+attach(vg_sales)
 ```
 
 
