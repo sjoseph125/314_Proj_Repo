@@ -34,6 +34,7 @@ vg_sales$Publisher <- as.factor(vg_sales$Genre)
 vg_sales$Genre <- as.factor(vg_sales$Genre)
 vg_sales$Developer <- as.factor(vg_sales$Developer)
 vg_sales$Rating <- as.factor(vg_sales$Rating)
+vg_sales$Year_of_Release <- as.factor(vg_sales$Year_of_Release)
 attach(vg_sales)
 ```
 
