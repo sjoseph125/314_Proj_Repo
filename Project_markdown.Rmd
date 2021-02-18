@@ -32,6 +32,8 @@ vg_sales[,6:9]<-as.numeric(NA_Sales,EU_Sales, JP_Sales, Other_Sales)
 vg_sales$Platform <- as.factor(vg_sales$Platform)
 vg_sales$Publisher <- as.factor(vg_sales$Genre)
 vg_sales$Genre <- as.factor(vg_sales$Genre)
+vg_sales$Developer <- as.factor(vg_sales$Developer)
+vg_sales$Rating <- as.factor(vg_sales$Rating)
 attach(vg_sales)
 ```
 
