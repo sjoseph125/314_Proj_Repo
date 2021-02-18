@@ -17,7 +17,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 
 **To:** [Add Name here and remove brackets]
 
-**From:**Samson Joseph
+**From:**Samson Joseph, Sean Simmons
 
 **Subject:** [Add Subject here and remove brackets]
 
@@ -35,7 +35,7 @@ attach(vg_sales)
 ## Data Analyses
 
 ### Analysis 1: One Quantitative Variable
-#### Analyst:[Name of Team Member]
+#### Analyst:Sean Simmons
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
