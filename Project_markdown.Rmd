@@ -28,9 +28,11 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Loading Dataset
 ```{r}
 vg_sales <- read.csv('video_games_sales_1985_2016.csv')
-attach(vg_sales)
 vg_sales[,6:9]<-as.numeric(NA_Sales,EU_Sales, JP_Sales, Other_Sales)
-
+vg_sales$Platform <- as.factor(vg_sales$Platform)
+vg_sales$Publisher <- as.factor(vg_sales$Genre)
+vg_sales$Genre <- as.factor(vg_sales$Genre)
+attach(vg_sales)
 ```
 
 
