@@ -39,6 +39,12 @@ vg_sales$User_Score <- as.numeric(vg_sales$User_Score)
 vg_sales$Name <- as.character(vg_sales$Name)
 ```
 
+##Cleaning Data
+```{r}
+vg_sales$Rating[vg_sales$Rating %in% c("")]<- NA
+vg_sales$Rating <-factor(vg_sales$Rating)
+```
+
 
 ## Data Analyses
 
