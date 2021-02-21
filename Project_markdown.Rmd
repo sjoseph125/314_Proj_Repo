@@ -48,7 +48,7 @@ vg_sales$Developer <-factor(vg_sales$Developer)
 
 ```
 # Import data with all "N/A" and "tbd" replaced with "NA"
-vgs <- read.csv('vg_sales with missing data replaced.csv')
+vgs <- read.csv('replaced variables.csv')
 vgs[,6:9]<-as.numeric(vgs$NA_Sales,vgs$EU_Sales, vgs$JP_Sales, vgs$Other_Sales)
 vgs$Platform <- as.factor(vgs$Platform)
 vgs$Publisher <- as.factor(vgs$Genre)
