@@ -47,8 +47,17 @@ vg_sales$Developer[vg_sales$Developer %in% c("")]<- NA
 vg_sales$Developer <-factor(vg_sales$Developer)
 
 ```
-
-
+# Import data with all "N/A" and "tbd" replaced with "NA"
+vgs <- read.csv('vg_sales with missing data replaced.csv')
+vgs[,6:9]<-as.numeric(vgs$NA_Sales,vgs$EU_Sales, vgs$JP_Sales, vgs$Other_Sales)
+vgs$Platform <- as.factor(vgs$Platform)
+vgs$Publisher <- as.factor(vgs$Genre)
+vgs$Genre <- as.factor(vgs$Genre)
+vgs$Developer <- as.factor(vgs$Developer)
+vgs$Rating <- as.factor(vgs$Rating)
+vgs$Year_of_Release <- as.factor(vgs$Year_of_Release)
+vgs$User_Score <- as.numeric(vgs$User_Score)
+vgs$Name <- as.character(vgs$Name)
 ## Data Analyses
 
 ### Analysis 1: One Quantitative Variable
