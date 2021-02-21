@@ -28,6 +28,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Loading Dataset
 ```{r}
 vg_sales <- read.csv('video_games_sales_1985_2016.csv')
+vgs <- read.csv('replaced variables.csv')
 vg_sales[,6:9]<-as.numeric(vg_sales$NA_Sales,vg_sales$EU_Sales, vg_sales$JP_Sales, vg_sales$Other_Sales)
 vg_sales$Platform <- as.factor(vg_sales$Platform)
 vg_sales$Publisher <- as.factor(vg_sales$Genre)
@@ -41,14 +42,14 @@ vg_sales$Name <- as.character(vg_sales$Name)
 
 ##Cleaning Data
 ```{r}
-vg_sales$Rating[vg_sales$Rating %in% c("")]<- NA
-vg_sales$Rating <-factor(vg_sales$Rating)
-vg_sales$Developer[vg_sales$Developer %in% c("")]<- NA
-vg_sales$Developer <-factor(vg_sales$Developer)
+vgs$Rating[vgs$Rating %in% c("")]<- NA
+vgs$Rating <-factor(vgs$Rating)
+vgs$Developer[vgs$Developer %in% c("")]<- NA
+vgs$Developer <-factor(vgs$Developer)
 
 ```
 # Import data with all "N/A" and "tbd" replaced with "NA"
-vgs <- read.csv('replaced variables.csv')
+vgs <- read.csv('vg_sales with missing data replaced.csv')
 vgs[,6:9]<-as.numeric(vgs$NA_Sales,vgs$EU_Sales, vgs$JP_Sales, vgs$Other_Sales)
 vgs$Platform <- as.factor(vgs$Platform)
 vgs$Publisher <- as.factor(vgs$Genre)
