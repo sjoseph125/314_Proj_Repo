@@ -17,7 +17,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 
 **To:** [Add Name here and remove brackets]
 
-**From:**Samson Joseph, Sean Simmons
+**From:**Samson Joseph, Sean Simmons, Daniel Gurwah
 
 **Subject:** [Add Subject here and remove brackets]
 
@@ -37,6 +37,15 @@ vg_sales$Rating <- as.factor(vg_sales$Rating)
 vg_sales$Year_of_Release <- as.factor(vg_sales$Year_of_Release)
 vg_sales$User_Score <- as.numeric(vg_sales$User_Score)
 vg_sales$Name <- as.character(vg_sales$Name)
+```
+
+##Cleaning Data
+```{r}
+vg_sales$Rating[vg_sales$Rating %in% c("")]<- NA
+vg_sales$Rating <-factor(vg_sales$Rating)
+vg_sales$Developer[vg_sales$Developer %in% c("")]<- NA
+vg_sales$Developer <-factor(vg_sales$Developer)
+
 ```
 
 
