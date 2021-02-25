@@ -56,7 +56,9 @@ vgs$Developer <-factor(vgs$Developer)
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-
+summary(vgs$NA_Sales, na.rm = TRUE) # summarize the variable NA_Sales
+sd(vgs$NA_Sales, na.rm = TRUE) # find the standard deviation
+IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
 ```
 
 
