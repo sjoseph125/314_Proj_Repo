@@ -35,7 +35,10 @@ library(tidyverse)
 vgs <- read.csv('replaced variables.csv')
 
 #Transforming variables to appropriate data types
-vgs[,6:9]<-as.numeric(vgs$NA_Sales,vgs$EU_Sales, vgs$JP_Sales, vgs$Other_Sales)
+vgs$NA_Sales<-as.numeric(vgs$NA_Sales)
+vgs$EU_Sales<-as.numeric(vgs$EU_Sales)
+vgs$JP_Sales<-as.numeric(vgs$JP_Sales)
+vgs$Other_Sales<-as.numeric(vgs$Other_Sales)
 vgs$Platform <- as.factor(vgs$Platform)
 vgs$Publisher <- as.factor(vgs$Genre)
 vgs$Genre <- as.factor(vgs$Genre)
