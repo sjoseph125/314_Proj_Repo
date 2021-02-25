@@ -1,9 +1,10 @@
 ---
 title: '[Unit 1 Project Template/Name your project here]'
 authors: '[Team Number and Names]'
-date: 
-output: html_notebook
-
+date: "null"
+output:
+  html_document:
+    df_print: paged
 ---
 ## Delete lines 8 - 16 section before submitting the file
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to use as a template for your Unit Project 1.
@@ -43,12 +44,15 @@ vgs$Rating <- as.factor(vgs$Rating)
 vgs$Year_of_Release <- as.factor(vgs$Year_of_Release)
 vgs$User_Score <- as.numeric(vgs$User_Score)
 vgs$Name <- as.character(vgs$Name)
+vgs$User_Score <- vgs$User_Score * 10
 
 #Replacing empty entries with NA
 vgs$Rating[vgs$Rating %in% c("")]<- NA
 vgs$Rating <-factor(vgs$Rating)
 vgs$Developer[vgs$Developer %in% c("")]<- NA
 vgs$Developer <-factor(vgs$Developer)
+vgs$Genre[vgs$Genre %in% c("")]<- NA
+vgs$Genre <-factor(vgs$Genre)
 ```
 
 
@@ -105,12 +109,12 @@ IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
 
 
 ### Analysis 5: Two Quantitative Variable
-#### Analyst:[Name of Team Member]
+#### Analyst:Samson Joseph
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r warning= FALSE}
-ggplot(vgs, aes(Critic_Score, User_Count)) + geom_point() +ylab('User_Count') + xlab('Critic Score')
+ggplot(vgs, aes(Critic_Score, NA_Sales)) + geom_point() +ylab('NA Sales') + xlab('Critic Score') + ylim(0, 20)
 ```
 
 
