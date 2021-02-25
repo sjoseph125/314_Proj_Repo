@@ -25,9 +25,15 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Background
 [Remove this text and replace with:  Provide a brief (one paragraph, please!) background description of 1) your task and 2) the context of your analysis. The context of your analysis should include: origin of dataset (if applicable), population of interest, data collection method, size of the data set, and a table of variables/factors to be explored with an explanation of what they mean and what type of variables they are.]
 
-## Loading Dataset
-```{r}
+
+```{r setup, include =FALSE}
+#Loading Libraries
+library(tidyverse)
+
+#Loading Dataset
 vgs <- read.csv('replaced variables.csv')
+
+#Transforming variables to appropriate data types
 vgs[,6:9]<-as.numeric(vgs$NA_Sales,vgs$EU_Sales, vgs$JP_Sales, vgs$Other_Sales)
 vgs$Platform <- as.factor(vgs$Platform)
 vgs$Publisher <- as.factor(vgs$Genre)
@@ -37,16 +43,14 @@ vgs$Rating <- as.factor(vgs$Rating)
 vgs$Year_of_Release <- as.factor(vgs$Year_of_Release)
 vgs$User_Score <- as.numeric(vgs$User_Score)
 vgs$Name <- as.character(vgs$Name)
-```
 
-##Cleaning Data
-```{r}
+#Replacing empty entries with NA
 vgs$Rating[vgs$Rating %in% c("")]<- NA
 vgs$Rating <-factor(vgs$Rating)
 vgs$Developer[vgs$Developer %in% c("")]<- NA
 vgs$Developer <-factor(vgs$Developer)
-
 ```
+
 
 ## Data Analyses
 
@@ -103,8 +107,8 @@ vgs$Developer <-factor(vgs$Developer)
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
-```{r}
-
+```{r warning= FALSE}
+ggplot(vgs, aes(Critic_Score, User_Count)) + geom_point() +ylab('User_Count') + xlab('Critic Score')
 ```
 
 
