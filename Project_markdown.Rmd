@@ -70,6 +70,12 @@ vgs$Genre <-factor(vgs$Genre)
 summary(vgs$NA_Sales, na.rm = TRUE) # summarize the variable NA_Sales
 sd(vgs$NA_Sales, na.rm = TRUE) # find the standard deviation
 IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
+nasmildthreshold = (.28*1.5) + .28 # mild threshold
+print(nasmildthreshold)
+nasmaxthreshold = (.28*3) + .28 # extreme threshold
+print(nasmaxthreshold)
+sum(vgs$NA_Sales>nasmaxthreshold, na.rm = TRUE) # number of observations above the max threshold
+ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = c(0, 1.12))
 ```
 
 
