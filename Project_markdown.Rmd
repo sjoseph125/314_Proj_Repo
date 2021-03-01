@@ -118,6 +118,7 @@ ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = 
 summary(vgs$NA_Sales)
 table(vgs$Genre)
 boxplot(vgs$NA_Sales~vgs$Genre)
+nasalesiqr <- IQR(vgs$NA_Sales, na.rm = TRUE)
 ```
 
 
