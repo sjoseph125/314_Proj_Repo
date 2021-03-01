@@ -141,9 +141,8 @@ This analysis of one relationship between a categorical variable and a quantitat
 
 ```{r}
 summary(vgs$NA_Sales)
-table(vgs$NA_Sales)
-table(vgs$Genre)
-boxplot(vgs$NA_Sales~vgs$Genre)
+boxplot(vgs$NA_Sales~vgs$Genre, main = "North American Sales By Genre", xlab =
+          "Genre", ylab = "North American Sales", ylim = c(0,0.8))
 ```
 
 
