@@ -112,9 +112,15 @@ When looking at the frequency table it's obvious that action games were clearly 
 
 
 ```{r}
+#clearing the no genre rows in the NA
 vgs$Genre[vgs$Genre %in% c("")]<- NA
+#creating the frequency table 
 freq_genre <- table(vgs$Genre)
+#creating the relative frequency table
 rel_freq_genre <- table(vgs$Genre)/nrow(vgs)
+#plotting and displaying the data
+freq_genre
+rel_freq_genre
 ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ```
 
