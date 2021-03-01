@@ -18,7 +18,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 
 **To:** DR. Random
 
-**From:**Samson Joseph, Sean Simmons, Daniel Gurwah
+**From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila
 
 **Subject:** Analysis of Video Games Dataset
 
