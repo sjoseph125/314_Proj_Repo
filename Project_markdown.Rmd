@@ -17,13 +17,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Delete lines 8-16 before submitting the file.
 
 **To:** DR. Random
-
-<<<<<<< HEAD
-**From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila
-=======
-**From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco
->>>>>>> 200267b7c28d26bccb4358f20a6a95c3b8c08ac8
-
+**From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco
 **Subject:** Analysis of Video Games Dataset
 
 
@@ -129,9 +123,6 @@ For this analysis I chose Rating and Genre for the categorical variables. Both v
 ```{r}
 twoway <- addmargins(table(vgs$Rating, vgs$Genre))
 twoway
-
-vgs_filtered<-filter(vgs, na.action=na.omit)
-ggplot(vgs, aes(y=Rating, x=Genre, size = )) + geom_boxplot()
 
 ggplot(vgs, aes(fill=Rating, y=Rating, x=Genre)) + geom_bar(position= 'stack', stat='identity') + ylab('Count') + xlab('Genre') + theme(axis.text.x=element_text(angle = -90, vjust = 0.5))
 ```
