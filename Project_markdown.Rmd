@@ -1,6 +1,6 @@
 ---
-title: '[Unit 1 Project Template/Name your project here]'
-authors: '[Team Number and Names]'
+title: 'Analysis of Video Games Dataset'
+authors: 'Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco'
 date: "null"
 output:
   html_document:
@@ -16,11 +16,11 @@ When you save the notebook, an HTML file containing the code and output will be 
 You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HTML file.
 ## Delete lines 8-16 before submitting the file.
 
-**To:** [Add Name here and remove brackets]
+**To:** DR. Random
 
 **From:**Samson Joseph, Sean Simmons, Daniel Gurwah
 
-**Subject:** [Add Subject here and remove brackets]
+**Subject:** Analysis of Video Games Dataset
 
 
 ## Background
@@ -64,7 +64,7 @@ vgs$Genre <-factor(vgs$Genre)
 ### Analysis 1: One Quantitative Variable
 #### Analyst:Sean Simmons
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+[Based on the summary statistics for the NA_Sales, I find the median to be the more accurate measure of center as there are outliers that skew the data to the right. To supplement the 5 number summary, I've identified a mild threshold at 1.5 times the IQR added to the 3rd quartile, and an extreme threshold at 3 times the IQR added to the 3rd quartile. There are 774 observations above the established extreme threshold, which I consider to be outliers. To better visualize the data, I have limited the y-value to not exceed the extreme threshold. 4511 observations where the NA_Sales data is missing have been removed.]
 
 ```{r}
 summary(vgs$NA_Sales, na.rm = TRUE) # summarize the variable NA_Sales
@@ -123,10 +123,11 @@ boxplot(vgs$NA_Sales~vgs$Genre)
 ### Analysis 5: Two Quantitative Variable
 #### Analyst:Samson Joseph
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+For this analysis the variables Critic_Score and NA_Sales were chosen. The explanatory variable would be Critic_Score and the response variable would be NA_Sales.As depicted by the graph below, there is a positive association between the two variables. As Critic_Score goes higher, so does NA_Sales. This makes sense as the more positive reviews from critics, the more the game will sell. Critic scores and reviews gives insight to how potential users might experience the game. They influence potential users, and that is clear based on the graph below. An outlier that was removed was Wii Sports. It is difficult to say if it's sales was related to critic score based on the data we have. It was sold with the Wii console, so it's sales numbers are not necessarily influenced by critics.
 
 ```{r warning= FALSE}
 ggplot(vgs, aes(Critic_Score, NA_Sales)) + geom_point() +ylab('NA Sales') + xlab('Critic Score') + ylim(0, 20)
+
 ```
 
 
