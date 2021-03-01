@@ -124,12 +124,16 @@ ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ### Analysis 3: Two Categorical Variables
 #### Analyst:[Joey Difrancesco]
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+For this analysis I chose Rating and Genre for the categorical variables. Both variables are nominal levels of measurement because we are assigning classification of each variable. For example, the video game belonging to the E rating is classified as E. I would hypothesize a potential association between the two because you can see some genres favor certain ratings. For example, the sports genre is mostly rated either E or NA. I can hypothesize that certain genres are tailored more towards certain ratings or a certain target audiences. Based on the two way table and the stacked bar chart, it looks like there is an association present. If the distribution of ratings throughout each genre was more spread out, meaning less zeros and less heavy leaning ratings, then I don't believe there would be an association, yet that's not the case.
 
 ```{r}
 twoway <- addmargins(table(vgs$Rating, vgs$Genre))
 twoway
-ggplot(vgs, aes(fill=Rating, y='Rating', x=Genre)) + geom_bar(position= 'stack', stat='identity') + ylab('Count') + xlab('Genre') + theme(axis.text.x=element_text(angle = -90, vjust = 0.5))
+
+vgs_filtered<-filter(vgs, na.action=na.omit)
+ggplot(vgs, aes(y=Rating, x=Genre, size = )) + geom_boxplot()
+
+ggplot(vgs, aes(fill=Rating, y=Rating, x=Genre)) + geom_bar(position= 'stack', stat='identity') + ylab('Count') + xlab('Genre') + theme(axis.text.x=element_text(angle = -90, vjust = 0.5))
 ```
 
 
@@ -164,7 +168,7 @@ boxplot(vgs$NA_Sales~vgs$Genre, main = "North American Sales By Genre", xlab =
 
 
 ### Analysis 5: Two Quantitative Variable
-#### Analyst:Samson Joseph
+#### Analyst: [Samson Joseph]
 
 For this analysis the variables Critic_Score and NA_Sales were chosen. The explanatory variable would be Critic_Score and the response variable would be NA_Sales.As depicted by the graph below, there is a positive association between the two variables. As Critic_Score goes higher, so does NA_Sales. This makes sense as the more positive reviews from critics, the more the game will sell. Critic scores and reviews gives insight to how potential users might experience the game. They influence potential users, and that is clear based on the graph below. An outlier that was removed was Wii Sports. It is difficult to say if it's sales was related to critic score based on the data we have. It was sold with the Wii console, so it's sales numbers are not necessarily influenced by critics.
 
