@@ -116,7 +116,7 @@ ggplot(vgs, aes(fill=Rating, y='Rating', x=Genre)) + geom_bar(position= 'stack',
 
 
 ### Analysis 4: One Categorical and One Quantitative Variable
-#### Analyst:[Christopher Aguila]
+#### Analyst:[Christopher A]
 
 This analysis of one relationship between a categorical variable and a
 quantitative variable involves video game genres and the North American sales of
