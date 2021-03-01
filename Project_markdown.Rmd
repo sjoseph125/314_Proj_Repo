@@ -17,13 +17,18 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Delete lines 8-16 before submitting the file.
 
 **To:** DR. Random
+
+<<<<<<< HEAD
 **From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila
+=======
 **From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco
+>>>>>>> 200267b7c28d26bccb4358f20a6a95c3b8c08ac8
+
 **Subject:** Analysis of Video Games Dataset
 
 
 ## Background
-With the provided dataset, our task was to analyze the data and take note of any interesting trends, associations, or interesting features. The dataset is an aggregation of data collected from Metacritic and VGCharts, which contains the following fields: Name, Platform, Year_of_Release, Genre, Publisher, NASales, EUSales, JPSales, OtherSales, Global_Sales, Critic_Score, Critic_Count, User_Score, User_Count, Developer, and Rating. These fields provide information about the sales, by several defined regions, as well as the reception from critics and users of 16,719 video games released between the years 1986 and 2016. See the table below for a more detailed breakdown of the variables, their type, and what they are.
+Remove this text and replace with:  Provide a brief (one paragraph, please!) background description of 1) your task and 2) the context of your analysis. The context of your analysis should include: origin of dataset (if applicable), population of interest, data collection method, size of the data set, and a table of variables/factors to be explored with an explanation of what they mean and what type of variables they are.
 
 Variable Name   | Data Type | Definition
 -------------   | --------- | ----------
@@ -74,6 +79,7 @@ vgs$Developer[vgs$Developer %in% c("")]<- NA
 vgs$Developer <-factor(vgs$Developer)
 vgs$Genre[vgs$Genre %in% c("")]<- NA
 vgs$Genre <-factor(vgs$Genre)
+vgs <- filter(vgs, Name != "")
 ```
 
 
@@ -84,7 +90,7 @@ vgs$Genre <-factor(vgs$Genre)
 
 Based on the summary statistics for the NA_Sales, I find the median to be the more accurate measure of center as there are outliers that skew the data to the right. To supplement the 5 number summary, I've identified a mild threshold at 1.5 times the IQR added to the 3rd quartile, and an extreme threshold at 3 times the IQR added to the 3rd quartile. There are 774 observations above the established extreme threshold, which I consider to be outliers. To better visualize the data, I have limited the y-value to not exceed the extreme threshold. 4511 observations where the NA_Sales data is missing have been removed.
 
-```{r warning=FALSE}
+```{r}
 summary(vgs$NA_Sales, na.rm = TRUE) # summarize the variable NA_Sales
 sd(vgs$NA_Sales, na.rm = TRUE) # find the standard deviation
 IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
@@ -93,8 +99,7 @@ print(nasmildthreshold)
 nasmaxthreshold = (.28*3) + .28 # extreme threshold
 print(nasmaxthreshold)
 sum(vgs$NA_Sales>nasmaxthreshold, na.rm = TRUE) # number of observations above the max threshold
-ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = c(0, 1.12))+
-  theme(axis.text.x = element_blank())
+ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = c(0, 1.12))
 ```
 
 
@@ -107,13 +112,9 @@ When looking at the frequency table it's obvious that action games were clearly 
 
 
 ```{r}
-#replacing the blank spaces with NA
 vgs$Genre[vgs$Genre %in% c("")]<- NA
-#creating the frequency table
 freq_genre <- table(vgs$Genre)
-#creating the relative frequency table
 rel_freq_genre <- table(vgs$Genre)/nrow(vgs)
-#plotting the frequency of each genre
 ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ```
 
@@ -127,8 +128,8 @@ ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 
 ```{r}
 twoway <- addmargins(table(vgs$Rating, vgs$Genre))
-twoway %>% knitr::kable()
-ggplot(vgs, aes(fill=Rating, y=Rating, x=Genre)) + geom_bar(position= 'stack', stat='identity') + ylab('Count') + xlab('Genre') + theme(axis.text.x=element_text(angle = -90, vjust = 0.5))
+twoway
+ggplot(vgs, aes(fill=Rating, y='Rating', x=Genre)) + geom_bar(position= 'stack', stat='identity') + ylab('Count') + xlab('Genre') + theme(axis.text.x=element_text(angle = -90, vjust = 0.5))
 ```
 
 
@@ -137,10 +138,27 @@ ggplot(vgs, aes(fill=Rating, y=Rating, x=Genre)) + geom_bar(position= 'stack', s
 ### Analysis 4: One Categorical and One Quantitative Variable
 #### Analyst:[Christopher Aguila]
 
+<<<<<<< HEAD
 This analysis of one relationship between a categorical variable and a quantitative variable involves video game genres and the North American sales of video games. I would hypothesize a potential association between video game genre (categorical variable) and North American sales (quantitative variable)because some genres are more frequently bought or are found to be more popular than other genres. I hypothesize that this would translate into varying sales with the most frequent genres having more sales than the rest. Based on the frequency table and the side by side box plot, there does appear to be an association. The most frequent genre of video games include Action (3370) and sports(2348). On the side by side box plot, the 3rd quartile for both genres stretches much farther than the rest, having high max sale values.
+=======
+This analysis of one relationship between a categorical variable and a
+quantitative variable involves video game genres and the North American sales of
+video games. I would hypothesize a potential association between video game
+genre (categorical variable) and North American sales (quantitative variable)
+because some genres are more frequently bought or are found to be more popular
+than other genres. I hypothesize that this would translate into varying sales with
+the most frequent genres having more sales than the rest. Based on the frequency
+table and the side by side box plot, there does appear to be an association.
+The most frequent genre of video games include Action (3370) and sports(2348).
+On the side by side box plot, the 3rd quartile for both genres stretches much
+farther than the rest, having high max sale values. 
+>>>>>>> 
 
 ```{r}
-summary(vgs$NA_Sales)
+summary(vgs$NA_Sales) #summary statistics of North American sales
+table(vgs$Genre) #Frequency table of Video Game Genres
+nasalesiqr <- IQR(vgs$NA_Sales, na.rm = TRUE) #Calculating the IQR of NA_Sales
+highoutlier <- 0.340+(1.5*nasalesiqr) #High outlier formula
 boxplot(vgs$NA_Sales~vgs$Genre, main = "North American Sales By Genre", xlab =
           "Genre", ylab = "North American Sales", ylim = c(0,0.8))
 ```
