@@ -1,6 +1,6 @@
 ---
 title: 'Analysis of Video Games Dataset'
-authors: 'Samson Joseph, Sean Simmons, Daniel Gurwah'
+authors: 'Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco'
 date: "null"
 output:
   html_document:
