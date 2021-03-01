@@ -82,7 +82,7 @@ vgs$Genre <-factor(vgs$Genre)
 ### Analysis 1: One Quantitative Variable
 #### Analyst:Sean Simmons
 
-[Based on the summary statistics for the NA_Sales, I find the median to be the more accurate measure of center as there are outliers that skew the data to the right. To supplement the 5 number summary, I've identified a mild threshold at 1.5 times the IQR added to the 3rd quartile, and an extreme threshold at 3 times the IQR added to the 3rd quartile. There are 774 observations above the established extreme threshold, which I consider to be outliers. To better visualize the data, I have limited the y-value to not exceed the extreme threshold. 4511 observations where the NA_Sales data is missing have been removed.]
+Based on the summary statistics for the NA_Sales, I find the median to be the more accurate measure of center as there are outliers that skew the data to the right. To supplement the 5 number summary, I've identified a mild threshold at 1.5 times the IQR added to the 3rd quartile, and an extreme threshold at 3 times the IQR added to the 3rd quartile. There are 774 observations above the established extreme threshold, which I consider to be outliers. To better visualize the data, I have limited the y-value to not exceed the extreme threshold. 4511 observations where the NA_Sales data is missing have been removed.
 
 ```{r warning=FALSE}
 summary(vgs$NA_Sales, na.rm = TRUE) # summarize the variable NA_Sales
