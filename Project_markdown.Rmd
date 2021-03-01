@@ -25,6 +25,25 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Background
 [Remove this text and replace with:  Provide a brief (one paragraph, please!) background description of 1) your task and 2) the context of your analysis. The context of your analysis should include: origin of dataset (if applicable), population of interest, data collection method, size of the data set, and a table of variables/factors to be explored with an explanation of what they mean and what type of variables they are.]
 
+Variable Name   | Data Type | Definition
+-------------   | --------- | ----------
+Name            | Character | The name of the game
+Platform        | Factor    | The platform the game is released on (i.e. PC, PS4, etc.)
+Year_of_Release | Factor    | The year the game was release in
+Genre           | Factor    | The genre of the game
+Publisher       | Factor    | The publisher of the game
+NA_Sales        | Numeric   | Sales in North America (in millions)
+EU_Sales        | Numeric   | Sales in Europe (in millions)
+JP_Sales        | Numeric   | Sales in Japan (in millions)
+Other_Sales     | Numeric   | Sales in the rest of the world (in millions)
+Global_Sales    | Numeric   | Total sales in the world
+Critic_Score    | Integer   | Aggregate score compiled by Metacritic staff
+Critic_Count    | Integer   | The number of cirited used in coming up with the Critic_Score
+User_Score      | Numeric   | Score by Metacritic's subscribers
+User_Count      | Integer   | Number of users who gave the User_Score
+Developer       | Factor    | Party responsible for creating the game
+Rating          | Factor    | Rating by the Entertainment Software Rating Board (ESRB)
+
 
 ```{r setup, include =FALSE}
 #Loading Libraries
