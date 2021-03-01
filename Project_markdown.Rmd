@@ -64,12 +64,18 @@ vgs$Genre <-factor(vgs$Genre)
 ### Analysis 1: One Quantitative Variable
 #### Analyst:Sean Simmons
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+[Based on the summary statistics for the NA_Sales, I find the median to be the more accurate measure of center as there are outliers that skew the data to the right. To supplement the 5 number summary, I've identified a mild threshold at 1.5 times the IQR added to the 3rd quartile, and an extreme threshold at 3 times the IQR added to the 3rd quartile. There are 774 observations above the established extreme threshold, which I consider to be outliers. To better visualize the data, I have limited the y-value to not exceed the extreme threshold. 4511 observations where the NA_Sales data is missing have been removed.]
 
 ```{r}
 summary(vgs$NA_Sales, na.rm = TRUE) # summarize the variable NA_Sales
 sd(vgs$NA_Sales, na.rm = TRUE) # find the standard deviation
 IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
+nasmildthreshold = (.28*1.5) + .28 # mild threshold
+print(nasmildthreshold)
+nasmaxthreshold = (.28*3) + .28 # extreme threshold
+print(nasmaxthreshold)
+sum(vgs$NA_Sales>nasmaxthreshold, na.rm = TRUE) # number of observations above the max threshold
+ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = c(0, 1.12))
 ```
 
 
@@ -100,12 +106,14 @@ IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
 
 
 ### Analysis 4: One Categorical and One Quantitative Variable
-#### Analyst:[Name of Team Member]
+#### Analyst:[Christopher Aguila]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-
+summary(vgs$NA_Sales)
+table(vgs$Genre)
+boxplot(vgs$NA_Sales~vgs$Genre)
 ```
 
 
