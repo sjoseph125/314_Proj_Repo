@@ -135,7 +135,7 @@ ggplot(vgs, aes(fill=Rating, y=Rating, x=Genre)) + geom_bar(position= 'stack', s
 
 
 ### Analysis 4: One Categorical and One Quantitative Variable
-#### Analyst:[Christopher Aguila]
+#### Analyst:[Christopher A]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
