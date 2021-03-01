@@ -30,7 +30,7 @@ Remove this text and replace with:  Provide a brief (one paragraph, please!) bac
 library(tidyverse)
 
 #Loading Dataset
-vgs <- read.csv('replaced variables.csv', na.strings = c("", "NA"))
+vgs <- read.csv('replaced variables.csv')#, na.strings = c("", "NA"))
 
 #Transforming variables to appropriate data types
 vgs$NA_Sales<-as.numeric(vgs$NA_Sales)
@@ -47,7 +47,16 @@ vgs$User_Score <- as.numeric(vgs$User_Score)
 vgs$Name <- as.character(vgs$Name)
 vgs$User_Score <- vgs$User_Score * 10
 
+
+
 #Replacing empty entries with NA
+vgs$Rating[vgs$Rating %in% c("")]<- NA
+vgs$Rating <-factor(vgs$Rating)
+vgs$Developer[vgs$Developer %in% c("")]<- NA
+vgs$Developer <-factor(vgs$Developer)
+vgs$Genre[vgs$Genre %in% c("")]<- NA
+vgs$Genre <-factor(vgs$Genre)
+vgs <- filter(vgs, Name != "")
 ```
 
 
