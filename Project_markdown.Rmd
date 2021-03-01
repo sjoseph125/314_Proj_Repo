@@ -92,9 +92,13 @@ When looking at the frequency table it's obvious that action games were clearly 
 
 
 ```{r}
+#replacing the blank spaces with NA
 vgs$Genre[vgs$Genre %in% c("")]<- NA
+#creating the frequency table
 freq_genre <- table(vgs$Genre)
+#creating the relative frequency table
 rel_freq_genre <- table(vgs$Genre)/nrow(vgs)
+#plotting the frequency of each genre
 ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ```
 
