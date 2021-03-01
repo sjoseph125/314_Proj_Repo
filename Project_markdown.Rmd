@@ -28,7 +28,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 
 
 ## Background
-Remove this text and replace with:  Provide a brief (one paragraph, please!) background description of 1) your task and 2) the context of your analysis. The context of your analysis should include: origin of dataset (if applicable), population of interest, data collection method, size of the data set, and a table of variables/factors to be explored with an explanation of what they mean and what type of variables they are.
+[Remove this text and replace with:  Provide a brief (one paragraph, please!) background description of 1) your task and 2) the context of your analysis. The context of your analysis should include: origin of dataset (if applicable), population of interest, data collection method, size of the data set, and a table of variables/factors to be explored with an explanation of what they mean and what type of variables they are.]
 
 
 ```{r setup, include =FALSE}
@@ -68,9 +68,9 @@ vgs$Genre <-factor(vgs$Genre)
 ### Analysis 1: One Quantitative Variable
 #### Analyst:Sean Simmons
 
-Based on the summary statistics for the NA_Sales, I find the median to be the more accurate measure of center as there are outliers that skew the data to the right. To supplement the 5 number summary, I've identified a mild threshold at 1.5 times the IQR added to the 3rd quartile, and an extreme threshold at 3 times the IQR added to the 3rd quartile. There are 774 observations above the established extreme threshold, which I consider to be outliers. To better visualize the data, I have limited the y-value to not exceed the extreme threshold. 4511 observations where the NA_Sales data is missing have been removed.
+[Based on the summary statistics for the NA_Sales, I find the median to be the more accurate measure of center as there are outliers that skew the data to the right. To supplement the 5 number summary, I've identified a mild threshold at 1.5 times the IQR added to the 3rd quartile, and an extreme threshold at 3 times the IQR added to the 3rd quartile. There are 774 observations above the established extreme threshold, which I consider to be outliers. To better visualize the data, I have limited the y-value to not exceed the extreme threshold. 4511 observations where the NA_Sales data is missing have been removed.]
 
-```{r}
+```{r warning=FALSE}
 summary(vgs$NA_Sales, na.rm = TRUE) # summarize the variable NA_Sales
 sd(vgs$NA_Sales, na.rm = TRUE) # find the standard deviation
 IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
@@ -79,7 +79,8 @@ print(nasmildthreshold)
 nasmaxthreshold = (.28*3) + .28 # extreme threshold
 print(nasmaxthreshold)
 sum(vgs$NA_Sales>nasmaxthreshold, na.rm = TRUE) # number of observations above the max threshold
-ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = c(0, 1.12))
+ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = c(0, 1.12))+
+  theme(axis.text.x = element_blank())
 ```
 
 
@@ -92,9 +93,13 @@ When looking at the frequency table it's obvious that action games were clearly 
 
 
 ```{r}
+#replacing the blank spaces with NA
 vgs$Genre[vgs$Genre %in% c("")]<- NA
+#creating the frequency table
 freq_genre <- table(vgs$Genre)
+#creating the relative frequency table
 rel_freq_genre <- table(vgs$Genre)/nrow(vgs)
+#plotting the frequency of each genre
 ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ```
 
@@ -123,7 +128,6 @@ summary(vgs$NA_Sales)
 table(vgs$NA_Sales)
 table(vgs$Genre)
 boxplot(vgs$NA_Sales~vgs$Genre)
-nasalesiqr <- IQR(vgs$NA_Sales, na.rm = TRUE)
 ```
 
 
