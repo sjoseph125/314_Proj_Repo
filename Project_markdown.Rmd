@@ -100,7 +100,7 @@ IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
 
 
 ### Analysis 4: One Categorical and One Quantitative Variable
-#### Analyst:[Name of Team Member]
+#### Analyst:[Christopher Aguila]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
