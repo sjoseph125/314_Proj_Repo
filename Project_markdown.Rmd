@@ -121,8 +121,10 @@ ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ```{r}
 summary(vgs$NA_Sales)
 table(vgs$Genre)
-boxplot(vgs$NA_Sales~vgs$Genre)
 nasalesiqr <- IQR(vgs$NA_Sales, na.rm = TRUE)
+highoutlier <- 0.340+(1.5*nasalesiqr)
+boxplot(vgs$NA_Sales~vgs$Genre, main = "North American Sales By Genre", xlab =
+          "Genre", ylab = "North American Sales", ylim = c(0,0.8))
 ```
 
 
