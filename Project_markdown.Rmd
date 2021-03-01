@@ -111,7 +111,9 @@ ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-
+summary(vgs$NA_Sales)
+table(vgs$Genre)
+boxplot(vgs$NA_Sales~vgs$Genre)
 ```
 
 
