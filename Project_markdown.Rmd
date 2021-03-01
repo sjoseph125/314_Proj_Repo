@@ -138,9 +138,6 @@ ggplot(vgs, aes(fill=Rating, y='Rating', x=Genre)) + geom_bar(position= 'stack',
 ### Analysis 4: One Categorical and One Quantitative Variable
 #### Analyst:[Christopher Aguila]
 
-<<<<<<< HEAD
-This analysis of one relationship between a categorical variable and a quantitative variable involves video game genres and the North American sales of video games. I would hypothesize a potential association between video game genre (categorical variable) and North American sales (quantitative variable)because some genres are more frequently bought or are found to be more popular than other genres. I hypothesize that this would translate into varying sales with the most frequent genres having more sales than the rest. Based on the frequency table and the side by side box plot, there does appear to be an association. The most frequent genre of video games include Action (3370) and sports(2348). On the side by side box plot, the 3rd quartile for both genres stretches much farther than the rest, having high max sale values.
-=======
 This analysis of one relationship between a categorical variable and a
 quantitative variable involves video game genres and the North American sales of
 video games. I would hypothesize a potential association between video game
@@ -152,7 +149,7 @@ table and the side by side box plot, there does appear to be an association.
 The most frequent genre of video games include Action (3370) and sports(2348).
 On the side by side box plot, the 3rd quartile for both genres stretches much
 farther than the rest, having high max sale values. 
->>>>>>> 
+
 
 ```{r}
 summary(vgs$NA_Sales) #summary statistics of North American sales
