@@ -87,11 +87,15 @@ ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = 
 ### Analysis 2: One Categorical Variable
 #### Analyst:[Name of Team Member]
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+When first looking at this variable, there were some rows where the genre was "". First, I replaced these rows with NA. However, this led to me realizing that these rows also were rows that had no game name. 
+When looking at the frequency table it's obvious that action games were clearly the highest games sold and played. They take up just over 20% of the data points. However, after plotting this variable I realized that sports games were also larger than most. The other game genres are about all within 1000 range of each other. 
 
 
 ```{r}
-
+vgs$Genre[vgs$Genre %in% c("")]<- NA
+freq_genre <- table(vgs$Genre)
+rel_freq_genre <- table(vgs$Genre)/nrow(vgs)
+ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ```
 
 
@@ -116,6 +120,7 @@ ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = 
 
 ```{r}
 summary(vgs$NA_Sales)
+table(vgs$NA_Sales)
 table(vgs$Genre)
 boxplot(vgs$NA_Sales~vgs$Genre)
 ```
