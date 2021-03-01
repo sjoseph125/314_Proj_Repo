@@ -121,12 +121,14 @@ ggplot(vgs, aes(fill=Rating, y='Rating', x=Genre)) + geom_bar(position= 'stack',
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-summary(vgs$NA_Sales)
-table(vgs$Genre)
-nasalesiqr <- IQR(vgs$NA_Sales, na.rm = TRUE)
-highoutlier <- 0.340+(1.5*nasalesiqr)
+summary(vgs$NA_Sales) #summary statistics of North American sales
+table(vgs$Genre) #Frequency table of Video Game Genres
+nasalesiqr <- IQR(vgs$NA_Sales, na.rm = TRUE) #Calculating the IQR of NA_Sales
+highoutlier <- 0.340+(1.5*nasalesiqr) #High outlier formula
 boxplot(vgs$NA_Sales~vgs$Genre, main = "North American Sales By Genre", xlab =
           "Genre", ylab = "North American Sales", ylim = c(0,0.8))
+#This is a side by side box and whisker plot that shows the North American video
+#game sales by genre. the y axis is limited based on the high outlier formula.
 ```
 
 
