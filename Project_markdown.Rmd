@@ -18,7 +18,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 
 **To:** DR. Random
 
-**From:**Samson Joseph, Sean Simmons, Daniel Gurwah
+**From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco
 
 **Subject:** Analysis of Video Games Dataset
 
@@ -93,8 +93,8 @@ ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = 
 
 
 
-### Analysis 3: Two Categorical Variables Joey
-#### Analyst:[Name of Team Member]
+### Analysis 3: Two Categorical Variables
+#### Analyst:[Joey Difrancesco]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
