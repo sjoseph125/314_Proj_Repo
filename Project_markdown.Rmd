@@ -37,7 +37,7 @@ JP_Sales        | Numeric   | Sales in Japan (in millions)
 Other_Sales     | Numeric   | Sales in the rest of the world (in millions)
 Global_Sales    | Numeric   | Total sales in the world
 Critic_Score    | Integer   | Aggregate score compiled by Metacritic staff
-Critic_Count    | Integer   | The number of cirited used in coming up with the Critic_Score
+Critic_Count    | Integer   | The number of ciritcs used in coming up with the Critic_Score
 User_Score      | Numeric   | Score by Metacritic's subscribers
 User_Count      | Integer   | Number of users who gave the User_Score
 Developer       | Factor    | Party responsible for creating the game
@@ -113,8 +113,8 @@ freq_genre <- table(vgs$Genre)
 #creating the relative frequency table
 rel_freq_genre <- table(vgs$Genre)/nrow(vgs)
 #plotting and displaying the data
-freq_genre
-rel_freq_genre
+freq_genre %>% knitr::kable()
+rel_freq_genre%>% knitr::kable()
 ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ```
 
