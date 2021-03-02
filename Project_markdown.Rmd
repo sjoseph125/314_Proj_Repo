@@ -86,13 +86,13 @@ Based on the summary statistics for the NA_Sales, I find the median to be the mo
 
 ```{r warning=FALSE}
 summary(vgs$NA_Sales, na.rm = TRUE) # summarize the variable NA_Sales
-sd(vgs$NA_Sales, na.rm = TRUE) # find the standard deviation
-IQR(vgs$NA_Sales, na.rm = TRUE) # find the IQR
 nasmildthreshold = (.28*1.5) + .28 # mild threshold
-nasmildthreshold
 nasmaxthreshold = (.28*3) + .28 # extreme threshold
-nasmaxthreshold
-sum(vgs$NA_Sales>nasmaxthreshold, na.rm = TRUE) # number of observations above the max threshold
+
+```
+```{r warning=FALSE}
+df<- data.frame("Standard Deviation" = sd(vgs$NA_Sales, na.rm = TRUE), 'IQR' = IQR(vgs$NA_Sales, na.rm = TRUE), 'Mild Threshold'=nasmildthreshold,'Max Threshold' =nasmaxthreshold,'Obs above Max Threshold' =sum(vgs$NA_Sales>nasmaxthreshold, na.rm = TRUE),  check.names = FALSE)
+df%>%knitr::kable()
 ggplot(data = vgs, aes(y = NA_Sales)) + geom_boxplot() + coord_cartesian(ylim = c(0, 1.12))
 ```
 
@@ -130,7 +130,7 @@ For this analysis I chose Rating and Genre for the categorical variables. Both v
 twoway <- addmargins(table(vgs$Rating, vgs$Genre))
 twoway %>% knitr::kable()
 
-ggplot(vgs, aes(y = Genre)) + geom_bar(aes(fill = Rating), position = position_stack(reverse = TRUE)) + ylab('Genre')
+ggplot(vgs, aes(y = Genre)) + geom_bar(aes(fill = Rating), position = position_stack(reverse = TRUE)) + ylab('Genre') +xlab('Number of Games Sold')
 ```
 
 
@@ -180,4 +180,4 @@ ggplot(vgs, aes(Critic_Score, NA_Sales)) + geom_point() +ylab('NA Sales') + xlab
 
 ## Recommendations
 
-[Add text section with your recommendations here. In this section, you will briefly summarize the most interesting features of your data. Are you seeing any trends, associations, or interesting features? Highlight these and make a recommendation that they be subjected to further statistical analysis. If there isn’t anything interesting, say so!]
+When analyzing the sales data in NA_Sales, we recommend using the median and the IQR, because there are outlier observations that cause the data to be skewed to the right. Further statistical analysis would be needed to see if this is a trend across all of the sales data. In the genre variable, the action genre had by far the most amount of games. The second most were the sports games. These two game types make up just over a third of the data. Within the stacked bar chart in analysis 3, we found it interesting that certain genres like sports, miscellaneous, and shooters favor certain ratings. We could potentially further analyze this to figure out the sales in relation to genres that favor specific ratings. Further statistical analysis can be extended from Analysis 4, where the most popular genres hold more impact on North American sales. It would be interesting to see how much of an impact video game ratings have on North American sales. An insight provided by the scatterplot in analysis 5, is that a high critic score is associated with high sales. Dr. Random could use this to forecast the potential sales of new games.  
