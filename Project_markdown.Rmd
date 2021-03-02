@@ -130,7 +130,7 @@ For this analysis I chose Rating and Genre for the categorical variables. Both v
 twoway <- addmargins(table(vgs$Rating, vgs$Genre))
 twoway %>% knitr::kable()
 
-ggplot(vgs, aes(fill=Rating, y=Rating, x=Genre)) + geom_bar(position= 'stack', stat='identity') + ylab('Count') + xlab('Genre') + theme(axis.text.x=element_text(angle = -90, vjust = 0.5))
+ggplot(vgs, aes(y = Genre)) + geom_bar(aes(fill = Rating), position = position_stack(reverse = TRUE)) + ylab('Genre')
 ```
 
 
