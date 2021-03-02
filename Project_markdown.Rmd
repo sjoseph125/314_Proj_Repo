@@ -5,24 +5,15 @@ date: "null"
 output:
   html_document:
     df_print: paged
----
-## Delete lines 8 - 16 section before submitting the file
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to use as a template for your Unit Project 1.
-
-Add new chunks by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
-
-When you save the notebook, an HTML file containing the code and output will be saved alongside it. YOU DO NOT NEED TO KNIT. Instead, click Preview. The HTML file that is rendered will automatically be saved.
-
-You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HTML file.
-## Delete lines 8-16 before submitting the file.
-
+    
 **To:** DR. Random <br>
 **From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco
 **Subject:** Analysis of Video Games Dataset
 
 
 ## Background
-Remove this text and replace with:  Provide a brief (one paragraph, please!) background description of 1) your task and 2) the context of your analysis. The context of your analysis should include: origin of dataset (if applicable), population of interest, data collection method, size of the data set, and a table of variables/factors to be explored with an explanation of what they mean and what type of variables they are.
+With the provided dataset, our task was to analyze the data and take note of any interesting trends, associations, or interesting features. The dataset is an aggregation of data collected from Metacritic and VGCharts, which contains the following fields - Name, Platform, Year_of_Release, Genre, Publisher, NASales, EUSales, JPSales, OtherSales, Global_Sales, Critic_Score, Critic_Count, User_Score, User_Count, Developer, and Rating. These fields provide information about the sales, by several defined regions, as well as the reception from critics and users of 16,719 video games released between the years 1986 and 2016. See the table below for a more detailed breakdown of the variables, their type, and what they are.
+
 
 Variable Name   | Data Type | Definition
 -------------   | --------- | ----------
