@@ -7,8 +7,8 @@ output:
     df_print: paged
     
 **To:** DR. Random <br>
-**From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco
-**Subject:** Analysis of Video Games Dataset
+**From:**Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco<br>
+**Subject:** Analysis of Video Games Dataset 
 
 
 ## Background
