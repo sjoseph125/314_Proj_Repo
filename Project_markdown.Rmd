@@ -124,13 +124,13 @@ ggplot(data = vgs) + geom_bar(mapping = aes(x = Genre))
 ### Analysis 3: Two Categorical Variables
 #### Analyst: Joey Difrancesco
 
-For this analysis I chose Rating and Genre for the categorical variables. Both variables are nominal levels of measurement because we are assigning classification of each variable. For example, the video game belonging to the E rating is classified as E. I would hypothesize a potential association between the two because you can see some genres favor certain ratings. For example, the sports genre is mostly rated either E or NA. I can hypothesize that certain genres are tailored more towards certain ratings or a certain target audiences. Based on the two way table and the stacked bar chart, it looks like there is an association present. If the distribution of ratings throughout each genre was more spread out, meaning less zeros and less heavy leaning ratings, then I don't believe there would be an association, yet that's not the case.
+For this analysis I chose Rating and Genre for the categorical variables. Both variables are nominal levels of measurement because we are assigning classification of each variable. For example, the video game belonging to the E rating is classified as E. I would hypothesize a potential association between the two because you can see some genres favor certain ratings. For example, the sports genre is mostly rated either E or NA. I can hypothesize that certain genres are tailored more towards certain ratings or certain target audiences. Based on the two way table and the stacked bar chart, it looks like there is an association present. If the distribution of ratings throughout each genre was more spread out, meaning less zeros and less heavy leaning ratings, then I don't believe there would be an association, yet that's not the case.
 
 ```{r}
 twoway <- addmargins(table(vgs$Rating, vgs$Genre))
 twoway %>% knitr::kable()
 
-ggplot(vgs, aes(fill=Rating, y=Rating, x=Genre)) + geom_bar(position= 'stack', stat='identity') + ylab('Count') + xlab('Genre') + theme(axis.text.x=element_text(angle = -90, vjust = 0.5))
+ggplot(vgs, aes(y = Genre)) + geom_bar(aes(fill = Rating), position = position_stack(reverse = TRUE)) + ylab('Genre')
 ```
 
 
