@@ -25,6 +25,36 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ## Background
 [Provide a brief (one paragraph, please that 1) recaps the key features of your dataset, 2) states your task as a follow-up of your previous data exploration.  You may use a table to summarize your dataset features, if you wish.]
 
+```{r setup, include =FALSE}
+#Loading Libraries
+library(tidyverse)
+
+#Loading Dataset
+vgs <- read.csv('replaced variables.csv')
+
+#Transforming variables to appropriate data types
+vgs$NA_Sales<-as.numeric(vgs$NA_Sales)
+vgs$EU_Sales<-as.numeric(vgs$EU_Sales)
+vgs$JP_Sales<-as.numeric(vgs$JP_Sales)
+vgs$Other_Sales<-as.numeric(vgs$Other_Sales)
+vgs$Platform <- as.factor(vgs$Platform)
+vgs$Publisher <- as.factor(vgs$Genre)
+vgs$Genre <- as.factor(vgs$Genre)
+vgs$Developer <- as.factor(vgs$Developer)
+vgs$Rating <- as.factor(vgs$Rating)
+vgs$Year_of_Release <- as.factor(vgs$Year_of_Release)
+vgs$User_Score <- as.numeric(vgs$User_Score)
+vgs$Name <- as.character(vgs$Name)
+vgs$User_Score <- vgs$User_Score * 10
+
+#Replacing empty entries with NA
+vgs$Rating[vgs$Rating %in% c("")]<- NA
+vgs$Rating <-factor(vgs$Rating)
+vgs$Developer[vgs$Developer %in% c("")]<- NA
+vgs$Developer <-factor(vgs$Developer)
+vgs$Genre[vgs$Genre %in% c("")]<- NA
+vgs$Genre <-factor(vgs$Genre)
+vgs <- filter(vgs, Name != "")
 
 ## Inference Analyses
 
