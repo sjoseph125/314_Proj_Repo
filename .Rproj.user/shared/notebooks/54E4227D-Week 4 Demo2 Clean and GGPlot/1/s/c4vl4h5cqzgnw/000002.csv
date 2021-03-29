@@ -1,0 +1,7 @@
+"0",""
+"0","plot(mpg$displ, mpg$hwy, "
+"0","     col = ""violet"",  "
+"0","      main = ""Displacement and Highway Mileage"","
+"0","      xlab= ""Engine Displacement (liters)"","
+"0","      ylab= ""Highway Mileage (mpg)"""
+"0","     )"

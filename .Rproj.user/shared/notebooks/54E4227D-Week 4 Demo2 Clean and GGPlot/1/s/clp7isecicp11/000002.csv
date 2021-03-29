@@ -1,0 +1,4 @@
+"0",""
+"0","ggplot(data = mpg) +"
+"0","  geom_histogram(mapping = aes(x = hwy), binwidth = 5)"
+"0",""

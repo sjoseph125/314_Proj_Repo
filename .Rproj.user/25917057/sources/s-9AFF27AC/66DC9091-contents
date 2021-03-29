@@ -1,0 +1,241 @@
+---
+title: "R Notebook: Week 4 Demo2 - Cleaning and ggplot2"
+author: L. A. Perine
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+################################
+This is the beginning of the demo.
+
+We're going to do some basic data cleaning.
+
+Call Tidyverse
+```{r}
+library(tidyverse)
+```
+
+
+
+
+Download the Starbucks expanded drinkMenu file and load it into a dataframe named sb.
+
+```{r}
+sb<-read.csv(file.choose())
+```
+
+View the structure of the dataframe.
+
+```{r}
+str(sb)
+```
+
+Note the variable representing the number of milligrams of caffeine is being read as a factor variable.  It should be numeric.  
+
+```{r}
+class(sb$Caffeine..mg.)
+levels(sb$Caffeine..mg.)
+```
+
+Let's clean up this column/vector/variable. First,create a new column named caff in the dataframe, then assign NA to any values of that variable that are missing or non-numeric
+
+```{r}
+sb$caff <-sb$Caffeine..mg.
+sb$caff[sb$caff %in% c("Varies", "varies", "")] <-NA
+levels (sb$caff)
+```
+
+Note that the "levels" which we cleaned up are still there.  Apply the factor command to reset the variable.
+
+```{r}
+sb$caff<-factor(sb$caff)
+levels(sb$caff)
+```
+
+The levels that were replaced by NA are now gone.  We need to convert this variable to numeric. To do so, we must first convert it to a character, then to numeric, as R does not do a clean factor to numeric conversion.
+
+```{r}
+sb$caff<-as.numeric(as.character(sb$caff))
+class(sb$caff)
+```
+
+Now let's look at handling missing data. When running summaries, remember to exclude the NA values with rm.na = TRUE.  You could also simply delete the rows (observation) or column (variable) with missing information.
+
+Let's check how many of the cleaned caffeine observations are missing.
+
+```{r}
+length (sb$caff)
+sum(is.na(sb$caff))
+```
+
+We see that 23 observations are missing.  So we can create an object (vector or dataframe) that only includes the observations with values. The first output uses the remove NA argument.  The second removes all NA rows.
+
+```{r}
+summary(sb$caff, rm.na=TRUE)
+
+caff_complete<-sb$caff[!is.na(sb$caff)]
+summary (caff_complete)
+```
+
+If you are working with more than one column, you may wish to use the complete cases function.  This is the syntax for that function.
+
+data[complete.cases(data), ] # Keep only the complete rows
+data_complete <- data[complete.cases(data), ] # Store the complete cases subset in a new data frame
+
+Moving on to doing some plotting with ggplot2, which is included in the Tidyverse package. We will use the mpg dataframe, which is also in the package.
+
+Have a look at the codebook for mpg and the structure of the dataset.
+
+```{r}
+?mpg
+#str(mpg)  #or
+glimpse(mpg)
+```
+
+Before, we used the basic plot function:
+
+```{r}
+plot(mpg$displ, mpg$hwy)
+```
+```{r}
+
+plot(mpg$displ, mpg$hwy, 
+     col = "violet",  
+      main = "Displacement and Highway Mileage",
+      xlab= "Engine Displacement (liters)",
+      ylab= "Highway Mileage (mpg)"
+     )
+```
+
+We can do the same plot using the ggplot2 function.
+
+```{r}
+ggplot(data=mpg)+
+  geom_point(mapping = aes(x=displ, y=hwy))
+```
+
+The basic syntax is 
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+
+We are going to add an aesthetic, color.
+
+
+```{r}
+ggplot(data=mpg)+
+  geom_point(mapping = aes(x=displ, y=hwy,color ="violet"))
+```
+
+This time, the color will be used with another variable: manufacturer.
+
+```{r}
+ggplot(data=mpg)+
+  geom_point(mapping = aes(x=displ, y=hwy, color = manufacturer))
+```
+
+We can add another geom such as a line. In this case, it is less repetitive to set a global aesthetic (your x and y variables), then add the points and lines with their own aethetics.
+
+```{r}
+ggplot(data=mpg, mapping = aes(x=displ, y=hwy))+
+  geom_point()+
+    geom_smooth()
+```
+
+Now, you can add features to each of the geoms.
+
+```{r}
+ggplot(data=mpg, mapping = aes(x=displ, y=hwy))+
+  geom_point(mapping = aes(color=class))+
+    geom_smooth()
+```
+
+You can see Chapters 3 and 7.7 of the R data handbook for more examples and details.
+Here are some examples of common plots that we use in Unit 1 Project.
+
+1. Barchart
+
+```{r}
+ggplot(data=mpg)+ 
+  geom_bar (mapping = aes(x=class)) 
+    
+```
+
+Here are two variations:
+Variation 1 we add color to the basic plot using the fill aesthetic.
+
+Variation 2, we use another variable categorical variable (fuel type) to create a stacked bar with color.
+
+```{r}
+#Variation 1
+ggplot(data=mpg)+ 
+  geom_bar (mapping = aes(x=class, fill=class)) 
+
+#Variation 2
+ggplot(data=mpg)+ 
+  geom_bar (mapping = aes(x=class, fill=fl)) 
+
+```
+
+2.  Boxplot (basic)
+
+```{r}
+#Variation 1
+ggplot(data=mpg)+ 
+  geom_boxplot (mapping = aes(x=hwy))
+
+#Variation 2
+ggplot(data=mpg)+ 
+  geom_boxplot (mapping = aes(y=hwy))
+
+```
+
+3. Side-by-side Boxplots. 
+Highway mileage is the quantitative variable and class is the categorical variable.
+
+```{r}
+#Variation 1
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
+  geom_boxplot()
+
+#variation 2
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
+  geom_boxplot() +
+  coord_flip()
+```
+
+4. Histogram
+
+```{r}
+
+ggplot(data = mpg) +
+  geom_histogram(mapping = aes(x = hwy), binwidth = 5)
+
+```
+
+5. Mosaic Plot
+
+Alas, there is no easy way to do this. Resort to base R for now.
+
+```{r}
+  mosaicplot(table(mpg$class,mpg$fl))
+```
+This is the end of my report.
+
+```{r}
+
+```
+
+
