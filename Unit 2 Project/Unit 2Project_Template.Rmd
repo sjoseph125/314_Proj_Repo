@@ -55,16 +55,22 @@ vgs$Developer <-factor(vgs$Developer)
 vgs$Genre[vgs$Genre %in% c("")]<- NA
 vgs$Genre <-factor(vgs$Genre)
 vgs <- filter(vgs, Name != "")
-
+```
 ## Inference Analyses
 
 ### Analysis 1: One Mean -[Name or description of your Variable]
-#### Analyst:[Name of Team Member]
+#### Analyst:[Sean Simmons]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-
+#histogram visualization
+ggplot() + geom_histogram(mapping = aes(x = vgs$NA_Sales), binwidth = .1) + xlim(0, 10)
+#density plot visualization
+ggplot() + geom_density(mapping = aes(x = vgs$NA_Sales))
+#quantile plot
+qqnorm(vgs$NA_Sales)
+> qqline(vgs$NA_Sales)
 ```
 
 
