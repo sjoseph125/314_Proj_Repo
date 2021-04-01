@@ -80,7 +80,7 @@ qqnorm(NA_sales1)
 qqline(NA_sales1)
 ###+++++++++++++++++
 ### T test
-t.test(NA_sales1, conf.level = 0.95)
+t.test(NA_sales1, conf.level = 0.95) # to produce a confidence interval
 ###
 inference(NA_sales1, est = "mean", type = "ci", method = "theoretical")
 ```
