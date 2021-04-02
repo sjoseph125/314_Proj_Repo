@@ -28,9 +28,8 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ```{r setup, include =FALSE}
 #Loading Libraries
 library(tidyverse)
-install.packages(inference)
 library(inference)
-
+library(statsr)
 #Loading Dataset
 vgs <- read.csv('replaced variables.csv')
 
@@ -71,6 +70,7 @@ vgs <- filter(vgs, Name != "")
 NA_sales1 <- vgs$NA_Sales[!is.na(vgs$NA_Sales)] 
 #view / check new variable: NA_sales1
 view(NA_sales1) 
+summary(NA_sales1)
 #histogram visualization
 ggplot() + geom_histogram(mapping = aes(x = NA_sales1), binwidth = .1) + xlim(0, 10)
 #density plot visualization
@@ -81,8 +81,11 @@ qqline(NA_sales1)
 ###+++++++++++++++++
 ### T test
 t.test(NA_sales1, conf.level = 0.95) # to produce a confidence interval
-###
-inference(NA_sales1, est = "mean", type = "ci", method = "theoretical")
+### not working
+#inference(NA_sales1, est = 'mean', type = 'ci', method = 'theoretical')
+summary(vgs$Global_Sales) #summarizing global sales to get population mean for null hypothesis
+t.test(NA_sales1, mu = .5335)
+
 ```
 
 
