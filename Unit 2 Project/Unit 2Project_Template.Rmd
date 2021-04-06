@@ -165,7 +165,16 @@ prop.test(x = 849, n = 16717, p = 0.078, alternative = "two.sided")$p.value
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
+nasplt <- vgs %>%
+  select(NA_Sales, Platform) %>%
+  filter(!is.na(NA_Sales)) %>%
+  filter(Platform == "PS3" | Platform == "X360")
 
+ggplot(data = nasplt, mapping = aes(x = Platform, y = NA_Sales)) +
+  geom_boxplot()
+
+ggplot(nasplt, aes(x=NA_Sales, color=Platform)) +
+    geom_density()
 ```
 
 
