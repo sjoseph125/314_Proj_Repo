@@ -175,11 +175,20 @@ nasplt <- vgs %>%
   filter(!is.na(NA_Sales)) %>%
   filter(Platform == "PS3" | Platform == "X360")
 
+summary(nasplt)
+
+nasplt %>%
+  group_by(Platform)%>%
+  summarize(n(),mean(NA_Sales), sd(NA_Sales))
+
 ggplot(data = nasplt, mapping = aes(x = Platform, y = NA_Sales)) +
   geom_boxplot()
 
 ggplot(nasplt, aes(x=NA_Sales, color=Platform)) +
     geom_density()
+
+by(nasplt$NA_Sales, wtsmk$Platform, summary)
+by(wtsmk$NA_Sales, wtsmk$Platform, sd)
 ```
 
 
