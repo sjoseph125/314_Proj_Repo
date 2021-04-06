@@ -1,6 +1,6 @@
 ---
 title: '[Unit 2 Project Template/Name your project here]'
-authors: '[Team Number and Names]'
+authors: 'Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco'
 date: 
 output: html_notebook
 
