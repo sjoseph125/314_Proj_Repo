@@ -1,9 +1,10 @@
 ---
 title: '[Unit 2 Project Template/Name your project here]'
 authors: 'Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco'
-date: 
-output: html_notebook
-
+date: "null"
+output:
+  html_document:
+    df_print: paged
 ---
 ## Delete lines 8 - 16 section before submitting the file
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to use as a template for your Unit 2 Project. 
