@@ -139,6 +139,7 @@ prop.test(x = 849, n = 16717, conf.level = .90)$conf.int
 
 
 #source: https://www.statista.com/statistics/189592/breakdown-of-us-video-game-sales-2009-by-genre/
+
 For the hypothesis test the question to answer is: Is the proportion of fighting video games sold from 1980 to 2020 (5.1%) different than the proportion of video games sold in 2018 (7.8)?
 null hypothesis: Fighting games make up 7.8% of the population of video games
 alternative hypothesis: fighting games do not make up 7.8% of the population of video games
