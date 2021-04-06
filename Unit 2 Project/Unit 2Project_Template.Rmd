@@ -68,8 +68,9 @@ vgs <- filter(vgs, Name != "")
 #v1
 ###CHOOSE ONE OF THESE TESTS TO INTERPRET NORMALITY
 #extract the NA_sales variable w/ NA observations removed
-NA_sales1 <- vgs$NA_Sales[!is.na(vgs$NA_Sales)] 
-#view / check new variable: NA_sales1
+global_sub_2016 <- subset(vgs$Global_Sales)
+global_2016 <- sum(global_sub_2016)
+#view / check new variable: NA_sales1w
 view(NA_sales1) 
 summary(NA_sales1)
 #histogram visualization
@@ -85,16 +86,17 @@ t.test(NA_sales1, conf.level = 0.95) # to produce a confidence interval
 ### not working
 #inference(NA_sales1, est = 'mean', type = 'ci', method = 'theoretical')
 summary(vgs$Global_Sales) #summarizing global sales to get population mean for null hypothesis
-t.test(NA_sales1, mu = .5335)
 
+t.test(NA_sales1, mu = 217900
+)
 ```
 ```{r}
 #v2
 ###CHOOSE ONE OF THESE TESTS TO INTERPRET NORMALITY
 #extract the NA_sales variable w/ NA observations removed
-global_sub_2016 <- subset(vgs$Global_Sales, vgs$Year_of_Release == "2016")
+global_sub_2016 <- subset(vgs$Global_Sales, vgs$Year_of_Release == "2016","")
 global_2016 <- sum(global_sub_2016)
-#view / check new variable: NA_sales1
+#view / check new variable: NA_sales1w
 view(NA_sales1) 
 summary(NA_sales1)
 #histogram visualization
@@ -110,7 +112,8 @@ t.test(NA_sales1, conf.level = 0.95) # to produce a confidence interval
 ### not working
 #inference(NA_sales1, est = 'mean', type = 'ci', method = 'theoretical')
 summary(vgs$Global_Sales) #summarizing global sales to get population mean for null hypothesis
-t.test(NA_sales1, mu = 179900
+
+t.test(NA_sales1, mu = 217900
 )
 
 ```
