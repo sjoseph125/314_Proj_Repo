@@ -123,7 +123,7 @@ t.test(NA_sales1, mu = 217900
 ### Analysis 2: One Proportion - Genre
 #### Analyst:Daniel Gurwah
 
-The parameter I investigated was the categorical variable genre. For the purpose of our test the category "fighting" in the genre variable was used as a success and the rest of them were counted as failures. There were 849 successes, which is about 5.1% of the sample size. There were 15868 failures, which is about 94.9% of the sample size. After calculating a confidence interval, I am 90% confident that fighting games make up **4.8% to 5.4%** of the video game population. 
+The parameter I investigated was the categorical variable genre. For the purpose of our test the category "fighting" in the genre variable was used as a success and the rest of them were counted as failures. There were 849 successes, which is about 5.1% of the sample size. There were 15868 failures, which is about 94.9% of the sample size. After calculating a confidence interval, we are 90% confident that fighting games make up **4.8% to 5.4%** of the video game population. 
 ```{r}
 #recording the genre variable, success is a fighting game
 genre_recode <- c(rep("success", 849), rep("failure", 15868))
@@ -141,8 +141,9 @@ prop.test(x = 849, n = 16717, conf.level = .90)$conf.int
 For the hypothesis test the question to answer is: Is the proportion of fighting video games sold from 1980 to 2020 (5.1%) different than the proportion of video games sold in 2018 (7.8)?
 null hypothesis: Fighting games make up 7.8% of the population of video games
 alternative hypothesis: fighting games do not make up 7.8% of the population of video games
-We would like to test this at a 10% significance level.
-Since the p-value is very small, we will reject the null hypothesis at a significance level of 10% where fighting games **do not** make up *7.8%* of the video game population. 
+We would like to test this at a 5% significance level. This will also be a two-tail test. 
+Since the p-value is very small, we will reject the null hypothesis at a significance level of 5% and conclude that there is no statistically significant evidence where fighting games make up *7.8%* of the video game population. 
+One limitation of our sample is that we do not include information or data on mobile games on the google play and ios store. 
 ```{r}
 #hyothesis test
 prop.test(x = 849, n = 16717, p = 0.078, alternative = "two.sided")$p.value
