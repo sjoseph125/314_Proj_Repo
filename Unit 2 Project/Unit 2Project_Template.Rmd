@@ -28,7 +28,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 ```{r setup, include =FALSE}
 #Loading Libraries
 library(tidyverse)
-library(inference)
+#library(inference)
 library(statsr)
 #Loading Dataset
 vgs <- read.csv('replaced variables.csv')
@@ -156,12 +156,46 @@ t.test(NA_sales1, mu = 217900
 
 
 
-### Analysis 5: Paired Data - [Name or description of your Variables]
-#### Analyst:[Name of Team Member]
+### Analysis 5: Paired Data - NA_Sales and EU_Sales
+#### Analyst: Samson Joseph
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+The variables chosen for this analysis are NA_Sales and EU_Sales. These two are quantitative variables that are paired because of different geographic regions. They are paired because we are trying to analyze the sales of the same games in different regions. We will be measuring the difference, or lack there of, of video game sales in these two regions. Then the explanatory variable is the region, and the response is the number of sales. In order to find the 95% confidence interval, we need to make sure we can use the CLT. The values are independent, since the sale of one game does not really affect the sale of another. The values were randomly chosen, and the dataset contains less than 10% of all video games sold.We get a confidence interval of approximately (0.1129 , 0.1567). In other words, we are 95% confident that the true difference between the sales of video games in North America and the EU is between 112,900 and 156,700, since the sales in the dataset are in the millions. Suggesting that more video games are sold in North America than in the EU.
 
-```{r}
+Since the shapiro test returned a p-value much less than 0.05, we need to use the t-distribution for the hypothesis test.There is a possibility the difference we got was simply due to chance, and in fact the number of sales should be the same. So we can do a hypothesis test, with a null and alternative hypotheses. The null will be, the true difference between North America and the EU is 0, and the alternative will be the true difference not being 0. This is a two-tail test, since the alternative hypothesis says the true difference is not equal to 0, instead of either greater than or less than the null value which would require a one-tail test. After doing the t-test, we get a t-value of about 12 and a p-value of 2.2e-16. That p-value is extremely smaller than our significance value of 0.05. This means we should reject the null hypothesis. Since the probability of getting the observed mean of about 0.13, given the null hypothesis, is much smaller than 0.05.
+
+Given the analysis of paired means, NA_Sales and EU_Sales, we can conclude that more games are sold in North America than in the European Union.This conclusion is corroborated by the 95% confidence interval and the hypothesis test. Both suggest a true difference that is positive, in favor favor of North America.
+
+```{r warning=FALSE}
+#Setting up necessary Dataframes.
+#Randomly sampled 10,000 values from NA_Sales and EU_Sales so we could find the difference without any errors due to row lengths.
+EU_Sales_A5 <- data.frame(EU_Sales=vgs$EU_Sales[!is.na(vgs$EU_Sales)])
+EU_Sales_A5 <- data.frame(sample_n(EU_Sales1, 10000), replace=FALSE)
+NA_sales_A5 <- data.frame(NA_Sales=NA_sales1)
+NA_sales_A5<-data.frame(sample_n(NA_sales2, 10000), replace=FALSE)
+
+#Creating boxplots to view the spread of the data in both dataframes.
+#They y values are limited from 0 to 0.42 because 0.42 is the cutoff for outliers in NA_Sales. The same value was used for the EU_Sales boxplot to help compare the two datasets.  
+ggplot(EU_Sales_A5, aes(x='',EU_Sales), ) + geom_boxplot() + ylim(0,.42) + ylab('EU Sales')
+ggplot(NA_sales_A5,aes(x='',NA_Sales)) + geom_boxplot() + ylim(0,.42) +ylab('NA Sales')
+
+#Creating a new dataframe to create a Diff column, with the difference between NA_Sales and EU_Sales
+NA_EU_Sales <- data.frame(NA_Sales=NA_sales_A5$NA_Sales, EU_Sales=EU_Sales_A5$EU_Sales) 
+NA_EU_Sales$Diff <- NA_EU_Sales$NA_Sales - NA_EU_Sales$EU_Sales
+
+#Creating a histogram to see the spread of the Diff column
+ggplot(NA_EU_Sales, aes(x=Diff)) + 
+  geom_histogram(binwidth = .1) + xlim(-5,7)
+
+#Testing for normality
+shapiro.test(sample(NA_EU_Sales$Diff,5000, replace=FALSE))
+qqnorm(NA_EU_Sales$Diff)
+qqline(NA_EU_Sales$Diff)
+
+#Creating a 95% confidence interval
+inference(Diff, data=NA_EU_Sales, statistic = 'mean', type = 'ci', method = 'theoretical')
+
+#Doing a t-test for the difference in the means.
+t.test(NA_EU_Sales$NA_Sales, NA_EU_Sales$EU_Sales, paired = TRUE, alternative = 'two.sided')
 
 ```
 
