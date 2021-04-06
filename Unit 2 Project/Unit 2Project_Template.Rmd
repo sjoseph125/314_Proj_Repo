@@ -142,7 +142,7 @@ t.test(NA_sales1, mu = 179900
 
 
 ### Analysis 4:Two Independent Means - [Name or description of your Variable]
-#### Analyst:[Name of Team Member]
+#### Analyst:[Christopher Aguila]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
