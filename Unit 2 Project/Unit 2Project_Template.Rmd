@@ -79,12 +79,9 @@ str(critic_score1)
 summary(critic_score1)
 #histogram visualization
 ggplot() + geom_histogram(mapping = aes(x = critic_score1), binwidth = .1)
-#density plot visualization
-##ggplot() + geom_density(mapping = aes(x = critic_score1))
-#quantile plot
-##qqnorm(critic_score1)
-##qqline(critic_score1)
+
 ###+++++++++++++++++
+
 ### T test
 t.test(critic_score1, conf.level = 0.95) # to produce a confidence interval
 
