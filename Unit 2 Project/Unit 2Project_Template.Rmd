@@ -138,7 +138,7 @@ ratedm <- vgs %>%
 
 summary(ratedm)
 
-
+prop.test(x = 43, n = 1173, conf.level = 0.99)
 ```
 
 
