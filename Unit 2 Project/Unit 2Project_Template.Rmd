@@ -152,12 +152,20 @@ prop.test(x = 849, n = 16717, p = 0.078, alternative = "two.sided")$p.value
 
 
 
-### Analysis 3: Two Proportions - [Name or description of your Variables]
-#### Analyst:[Name of Team Member]
+### Analysis 3: Two Proportions - [Genre and Rating]
+#### Analyst:[Joseph diFrancesco]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
+
+genre_sf <- c(rep("Success", 2348), rep("Faiure", 14369))
+rating_sf <- c(rep("Success", 3991), rep("Failure", 12726))
+
+table(genre_sf)
+table(rating_sf)
+
+prop.test(x = c(2348,3991), n = c(16717,16717), conf.level = 0.99)
 
 ```
 
