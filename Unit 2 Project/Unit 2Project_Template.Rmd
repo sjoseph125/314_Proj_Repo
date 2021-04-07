@@ -207,9 +207,9 @@ Given the analysis of paired means, NA_Sales and EU_Sales, we can conclude that 
 #Setting up necessary Dataframes.
 #Randomly sampled 10,000 values from NA_Sales and EU_Sales so we could find the difference without any errors due to row lengths.
 EU_Sales_A5 <- data.frame(EU_Sales=vgs$EU_Sales[!is.na(vgs$EU_Sales)])
-EU_Sales_A5 <- data.frame(sample_n(EU_Sales1, 10000), replace=FALSE)
-NA_sales_A5 <- data.frame(NA_Sales=NA_sales1)
-NA_sales_A5<-data.frame(sample_n(NA_sales2, 10000), replace=FALSE)
+EU_Sales_A5 <- data.frame(sample_n(EU_Sales_A5, 10000), replace=FALSE)
+NA_sales_A5 <- data.frame(NA_Sales=vgs$NA_Sales[!is.na(vgs$NA_Sales)])
+NA_sales_A5<-data.frame(sample_n(NA_sales_A5, 10000), replace=FALSE)
 
 #Creating boxplots to view the spread of the data in both dataframes.
 #They y values are limited from 0 to 0.42 because 0.42 is the cutoff for outliers in NA_Sales. The same value was used for the EU_Sales boxplot to help compare the two datasets.  
