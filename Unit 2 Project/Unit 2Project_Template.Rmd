@@ -147,7 +147,20 @@ prop.test(x = c(2348,3991), n = c(16717,16717), conf.level = 0.99)
 ### Analysis 4:Two Independent Means - [Name or description of your Variable]
 #### Analyst:[Christopher Aguila]
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+The variables chosen for this analysis are North American Sales (NA_Sales), which is a quantitative variable, and Platform, which is a categorical variable. The platform variable has been reclassified to only include the console platforms of Playstation 3 and Xbox 360. These two groups are independent as there is no relation between the North American sales for each platform. The explanatory variable in this situation would be the type of platform and the response variable would be the North American sales for each platform. Through calculating the confidence interval below, we
+are 95% confident that the true difference in North American sales for the PS3
+and Xbox 360 is between .21 and .06. Note that the confidence interval is
+negative, which indicates that there were less North American sales for the PS3
+platform than the Xbox 360 platform.
+
+For my Hypothesis Test, I have designated the null hypothesis as: The true difference between North American sales for PS3 and Xbox360 is equal to 0. Furthermore, I have
+designated the alternative hypothesis as: The true difference between North American sales for PS3 and Xbox 360 is not equal to 0. The shapiro test returned a p-value much less than the significance level of 0.05, so a t test was needed to be conducted for the hypothesis test. This is a two tail test because our alternative hypothesis is that there is only a non zero difference. If I had specified that the true difference is greater than 0 or less than 0 for the alternative hypothesis, it would have been a one tail test. The t test calculates a t value of -3.5 and a p value of .0004. With the p-value being smaller than the significance level of 0.05, we
+can reject the null hypothesis. 
+
+
+The 95% confidence interval, alongside the hypothesis test and the negative
+true difference they calculate corroborate to show
+that there are less North American sales for the PS3 platform than for the Xbox 360 platform.
 
 ```{r}
 nasplt <- vgs %>%
