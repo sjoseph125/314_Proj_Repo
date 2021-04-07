@@ -131,13 +131,13 @@ prop.test(x = 849, n = 16717, p = 0.078, alternative = "two.sided")$p.value
 
 ```{r}
 
-genre_sf <- c(rep("Success", 2348), rep("Faiure", 14369))
-rating_sf <- c(rep("Success", 3991), rep("Failure", 12726))
+ratedm <- vgs %>%
+  select(Rating, Genre) %>%
+  filter(Rating == "M") %>%
+  filter(Genre == "Shooter" | Genre == "Action")
 
-table(genre_sf)
-table(rating_sf)
+summary(ratedm)
 
-prop.test(x = c(2348,3991), n = c(16717,16717), conf.level = 0.99)
 
 ```
 
