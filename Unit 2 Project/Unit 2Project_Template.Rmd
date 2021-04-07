@@ -6,16 +6,6 @@ output:
   html_document:
     df_print: paged
 ---
-## Delete lines 8 - 16 section before submitting the file
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to use as a template for your Unit 2 Project. 
-
-Add new chunks by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
-
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).  You may need to Knit to HTML, using the KNIT button on the toolbar. 
-
-You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HTML file.
-## Delete lines 8-16 before submitting the file.
-
 **To:** DR. Random<br> 
 
 **From:** Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco<br>
@@ -109,8 +99,7 @@ prop.test(x = 849, n = 16717, conf.level = .90)$conf.int
 ```
 
 
-#source: https://www.statista.com/statistics/189592/breakdown-of-us-video-game-sales-2009-by-genre/
-
+source: https://www.statista.com/statistics/189592/breakdown-of-us-video-game-sales-2009-by-genre/
 For the hypothesis test the question to answer is: Is the proportion of fighting video games sold from 1980 to 2020 (5.1%) different than the proportion of video games sold in 2018 (7.8)?
 null hypothesis: Fighting games make up 7.8% of the population of video games
 alternative hypothesis: fighting games do not make up 7.8% of the population of video games
@@ -243,7 +232,9 @@ t.test(NA_EU_Sales$NA_Sales, NA_EU_Sales$EU_Sales, paired = TRUE, alternative = 
 
 
 ## Recommendations
-
-[Add text section with your recommendations here. In this section, you will briefly  summarize the conclusions of your estimates and tests. What statistically significant findings did you have?  What limitations are there in your findings?  Discuss if/how this is relevant in the context of your data – does it give us new insights ? Help us to better understand some phenomenon?  Or not?]
+Analysis 1 examined the critic score variable. We used a self-reported critic-score average published by Metacritic as a baseline to test our variable against. Using a t-test, we found that the mean critic score in our dataset to be lower than Metacritic's average score. This is interesting because a portion of our sample comes from a web scrape of Metacritic and this may imply that critic scores hosted by VGCharts tend to have a lower value. This finding does have it’s limitations however as the source for Metacritic’s number is a bit opaque; there is no information on how much data they’re working with, and no mention of the method used to come to the number.
+While exploring the inference of a single categorical variable(Genre) in analysis 2, we found that based on our sample we are 90% confident that fighting games make up 4.8% to 5.4% of the video game population. 
+Through the fourth analysis, the 95% confidence interval calculated as well as the Hypothesis test conducted pointed to there being less North American sales for the PS3 platform than the Xbox 360 platform. This is relevant in the context of our data as each platform can be classified into specific generations of video games, with the PS3 and Xbox 360 being the most prominent gaming platforms of the seventh generation. It would be  interesting to further analyze the user ratings for each console on top of the north american sales for each platform in order to better gauge the popularity of those platforms.
+Lastly, analysis 5 showed us the difference of the paired means, NA_Sales and EU_Sales. The 95% confidence interval suggested the true difference to be between .11 and .15, or between 111,000 and 150,000. In other words, we can be 95% sure between 111,000 to 150,000 more games are solid in the North American Region. This is also confirmed by the hypothesis test, which gave a p-value of less than 2.2e-16. That is much lower than our significance level of .05, so the null hypothesis of the true difference being 0 is rejected.
 
 
