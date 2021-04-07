@@ -130,14 +130,15 @@ prop.test(x = 849, n = 16717, p = 0.078, alternative = "two.sided")$p.value
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-
+#Condensing data to all games that are rated M and all
+#shooter and action games rated M
 ratedm <- vgs %>%
   select(Rating, Genre) %>%
   filter(Rating == "M") %>%
   filter(Genre == "Shooter" | Genre == "Action")
-
+#Creating a summary making sure the data was filtered correctly
 summary(ratedm)
-
+#Getting a 99% confidence interval, with x = (608 action games rated M - 565 shooter games rated M)
 prop.test(x = 43, n = 1173, conf.level = 0.99)
 ```
 
