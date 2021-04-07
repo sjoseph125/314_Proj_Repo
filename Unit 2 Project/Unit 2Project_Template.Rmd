@@ -1,5 +1,5 @@
 ---
-title: '[Unit 2 Project Template/Name your project here]'
+title: 'Unit 2 Project: Further Analysis of Video Games Dataset'
 authors: 'Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco'
 date: "null"
 output:
@@ -16,11 +16,11 @@ When you save the notebook, an HTML file containing the code and output will be 
 You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HTML file.
 ## Delete lines 8-16 before submitting the file.
 
-**To:** [Add Name here and remove brackets]
+**To:** DR. Random<br> 
 
-**From:**[Add Team Members names here and remove brackets ]
+**From:** Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco<br>
 
-**Subject:** [Add Subject here and remove brackets]
+**Subject:** Further Analysis of Video Games Dataset 
 
 
 ## Background
@@ -142,46 +142,28 @@ prop.test(x = 849, n = 16717, p = 0.078, alternative = "two.sided")$p.value
 ### Analysis 4:Two Independent Means - [Name or description of your Variable]
 #### Analyst:[Christopher Aguila]
 
-The variables chosen for this analysis are North American Sales (NA_Sales), which is a quantitative variable, and Platform, which is a categorical variable. The platform variable has been reclassified to only include the console platforms of Playstation 3 and Xbox 360. These two groups are independent as there is no relation between the North American sales for each platform. The explanatory variable in this situation would be the type of platform and the response variable would be the North American sales for each platform. Through calculating the confidence interval below, we
-are 95% confident that the true difference in North American sales for the PS3
-and Xbox 360 is between .21 and .06. Note that the confidence interval is
-negative, which indicates that there were less North American sales for the PS3
-platform than the Xbox 360 platform.
-
-For my Hypothesis Test, I have designated the null hypothesis as: The true difference between North American sales for PS3 and Xbox360 is equal to 0. Furthermore, I have
-designated the alternative hypothesis as: The true difference between North American sales for PS3 and Xbox 360 is not equal to 0. The shapiro test returned a p-value much less than the significance level of 0.05, so a t test was needed to be conducted for the hypothesis test. This is a two tail test because our alternative hypothesis is that there is only a non zero difference. If I had specified that the true difference is greater than 0 or less than 0 for the alternative hypothesis, it would have been a one tail test. The t test calculates a t value of -3.5 and a p value of .0004. With the p-value being smaller than the significance level of 0.05, we
-can reject the null hypothesis. 
-
-
-The 95% confidence interval, alongside the hypothesis test and the negative
-true difference they calculate corroborate to show
-that there are less North American sales for the PS3 platform than for the Xbox 360 platform. 
+[Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-#Subsetting from video game dataset, where NA's are excluded and only PS3
-# and x360 platforms are included.
 nasplt <- vgs %>%
   select(NA_Sales, Platform) %>%
   filter(!is.na(NA_Sales)) %>%
   filter(Platform == "PS3" | Platform == "X360")
 
-#viewing summary of subsetted data
 summary(nasplt)
+
 nasplt %>%
   group_by(Platform)%>%
   summarize(n(),mean(NA_Sales), sd(NA_Sales))
 
-#visualizing data as a boxplot
 ggplot(data = nasplt, mapping = aes(x = Platform, y = NA_Sales)) +
   geom_boxplot()
 
-#Testing data for normailty
-shapiro.test(nasplt$NA_Sales[nasplt$Platform=="PS3"])
-shapiro.test(nasplt$NA_Sales[nasplt$Platform=="X360"])
+ggplot(nasplt, aes(x=NA_Sales, color=Platform)) +
+    geom_density()
 
-#Generating the confidence interval as well as hypothesis test.
-t.test(NA_Sales ~ Platform, data = nasplt, var.equal = TRUE)
-
+by(nasplt$NA_Sales, wtsmk$Platform, summary)
+by(wtsmk$NA_Sales, wtsmk$Platform, sd)
 ```
 
 
