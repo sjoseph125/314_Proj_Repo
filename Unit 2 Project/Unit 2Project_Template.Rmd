@@ -1,7 +1,7 @@
 ---
 title: 'Unit 2 Project: Further Analysis of Video Games Dataset'
 authors: 'Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco'
-date: "null"
+date: "4/6/2021"
 output:
   html_document:
     df_print: paged
