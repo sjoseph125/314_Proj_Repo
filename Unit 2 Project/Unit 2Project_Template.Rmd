@@ -50,7 +50,7 @@ vgs <- filter(vgs, Name != "")
 ```
 ## Inference Analyses
 
-### Analysis 1: One Mean -[NA_Sales]
+### Analysis 1: One Mean -[Critic Score]
 #### Analyst:[Sean Simmons]
 
 The variable being analyzed is the critic score, for which we have 8137 observations within the dataset. In the analysis, I will be comparing our sample to a self-reported critic-score average published by Metacritic [ https://www.metacritic.com/publication/total-video-games ], which states that the average critic score is 74.4. In order to produce a confidence interval, I first needed to see that our data met the conditions to use CLT. Our sample contains less than 10% of all scores made by critics. There are ~1,200,000 games [ https://gamingshift.com/how-many-video-games-exist/#:~:text=After doing some research%2C our, games for the Nintendo Switch. ] in existence and counting, so I am assuming that our sample size meets these criteria. The values are independent, as they are aggregated from many different critics reviewing unique games. However, the sample was not random so this data does not meet conditions for CLT. The data has a slight left skew but is mostly normal. Since our sample size is so large, at 8137, we can assume its normality and use the t-test. As such, we are 95% confident that the true mean of critic scores for video games is between 68.66479 and 69.27057.
