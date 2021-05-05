@@ -69,7 +69,33 @@ vgs <- filter(vgs, Name != "")
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
+# new working dataset
+vgs1 <- vgs
+# combine all platforms relating console products 
+levels(vgs1$Platform)[levels(vgs1$Platform)%in%c("Wii", "NES", "X360", "PS3", "PS2", "SNES", "PS4", "N64", "PS", "XB", "2600", "XOne", "WiiU", "GC", "GEN", "DC", "SAT", "SCD", "NG", "TG16", "3DO", "PCFX")] <- "console"
 
+# combine all platforms relating handheld products
+levels(vgs1$Platform)[levels(vgs1$Platform)%in%c("GB", "DS", "GBA", "3DS", "PSP", "PSV", "WS", "GG")] <- "handheld"
+
+# check levels
+levels(vgs1$Platform)
+
+# # combine all ratings intended for ages under 18
+levels(vgs1$Rating)[levels(vgs1$Rating)%in%c("E", "E10+", "K-A", "EC", "T")] <- "kids"
+
+# combine all ratings intended for ages over 18
+levels(vgs1$Rating)[levels(vgs1$Rating)%in%c("M", "AO")] <- "adults"
+
+levels(vgs1$Rating)
+
+# contingency table with new variables
+vgs1t <- table(vgs1$Rating, vgs1$Platform)
+  
+vgs1t
+
+mosaicplot(vgs1t, main = "Intended Audience Accross Platforms",ylab = "Platform", xlab = "Age Groups")
+
+chisq.test(vgs1t)
 ```
 
 
