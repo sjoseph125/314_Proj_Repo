@@ -29,6 +29,7 @@ You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HT
 #install.packages('GGally')
 #install.packages('psych')
 library(tidyverse)
+library(GGally)
 library(psych)
 library(car)
 library(statsr)
@@ -143,22 +144,22 @@ chisq.test(vgs1t)
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-describe(vgs$NA_Sales)
+describe(vgs$EU_Sales)
 NA_sales_A5 <- data.frame(NA_Sales=vgs$NA_Sales[!is.na(vgs$NA_Sales)])
 
-ggplot(NA_sales_A5,aes(x='',NA_Sales)) + geom_boxplot() + ylim(0,.42) +ylab('NA Sales')
+ggplot(EU_Sales_A5,aes(x='',EU_Sales)) + geom_boxplot() + ylim(0,.42) +ylab('NA Sales')
 
-ggplot(NA_sales_A5, aes(x=NA_Sales)) + geom_histogram(binwidth = .1) + xlim(.01,5)
+ggplot(EU_Sales_A5, aes(x=EU_Sales)) + geom_histogram(binwidth = .01) + xlim(.01,1)
 
-vgs_comp <- vgs[complete.cases(vgs),]
 
-res <- data.frame( vgs_comp %>%
-  select_if(is.numeric) %>%
-  cor())
-res
-
-model <- lm(EU_Sales ~ NA_Sales, data = vgs_comp)
-summary(model)
+# vgs_comp <- na.omit(vgs)
+# res <- data.frame( vgs_comp %>%
+#   select_if(is.numeric) %>%
+#   cor())
+# res
+# 
+# model <- lm(EU_Sales ~ NA_Sales, data = vgs_comp)
+# summary(model)
 
 qqnorm(model$residuals)
 qqline(model$residuals)
@@ -168,8 +169,23 @@ A5 <- vgs %>%
   filter(Platform == "PS4" | Platform == "XOne")
 A5<-na.omit(A5)
 
+
+corT <- data.frame(A5 %>%
+  select_if(is.numeric) %>%
+  cor())
+corT
+A5 %>%
+  select_if(is.numeric) %>%
+  ggpairs()
+
 Mlm <- model <- lm(EU_Sales ~ NA_Sales + Platform, data = A5)
 summary(Mlm)
+
+plot(Mlm$residuals ~ A5$EU_Sales,xlim=c(0,.5))
+abline(h = 0, lty = 3)
+leveragePlots(Mlm, xlim=c(-.5,.5))
+
+sigma(Mlm)/mean(A5$EU_Sales)
 
 anova(Mlm)
 ```
