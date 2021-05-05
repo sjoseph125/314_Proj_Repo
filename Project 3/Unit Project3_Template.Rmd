@@ -107,7 +107,18 @@ chisq.test(vgs1t)
 
 
 ```{r}
+vgs_copy <- select(vgs, Rating, Global_Sales)
+vgs_annova <- na.omit(vgs_copy)
 
+table(vgs_annova$Rating)
+
+vgs_annova <- mutate(vgs_annova, Rating = ifelse(Rating == "E" | Rating == "E10+" | Rating == "EC" | Rating == "K-A", "E",
+                                                 ifelse(Rating == "AO" | Rating == "M", "M", 
+                                                        ifelse(Rating == "RP", "RP",
+                                                               ifelse(Rating == "T", "T",
+                                                                      Rating)))))
+
+table(vgs_annova$Rating)
 ```
 
 
