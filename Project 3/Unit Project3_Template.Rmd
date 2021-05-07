@@ -147,21 +147,20 @@ pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 29
 
 
 
-### Analysis 3:[Name/Description]
-#### Analyst:[Name of Team Member]
+### Analysis 3: Simple Linear Regression - EU Sales and JP Sales
+#### Analyst: Joey diFrancesco
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+[]
 
 ```{r}
 
 describe(vgs$EU_Sales)
 describe(vgs$JP_Sales)
 
-ggplot(vgs, aes(x = JP_Sales, y = EU_Sales )) + xlim(0, 15) +
+ggplot(vgs, aes(x = JP_Sales, y = EU_Sales )) + xlim(0, 12) + ylim(0, 15) +
     geom_point() + geom_smooth(method=lm, se=FALSE)
 
-
-cor(vgs$JP_Sales, vgs$EU_Sales)
+cor.test(vgs$JP_Sales, vgs$EU_Sales, method = "pearson", conf.level = 0.95)
 
 mod <- lm(vgs$EU_Sales ~ vgs$JP_Sales)
 summary(mod)
@@ -234,9 +233,8 @@ summary(model)
 ```{r}
 describe(vgs$EU_Sales)
 NA_sales_A5 <- data.frame(NA_Sales=vgs$NA_Sales[!is.na(vgs$NA_Sales)])
-EU_Sales_A5 <- data.frame(EU_Sales=vgs$EU_Sales[!is.na(vgs$EU_Sales)])
 
-ggplot(EU_Sales_A5,aes(x='',EU_Sales)) + geom_boxplot() + ylim(0,.42) +ylab('EU Sales')
+ggplot(EU_Sales_A5,aes(x='',EU_Sales)) + geom_boxplot() + ylim(0,.42) +ylab('NA Sales')
 
 ggplot(EU_Sales_A5, aes(x=EU_Sales)) + geom_histogram(binwidth = .01) + xlim(.01,1)
 
