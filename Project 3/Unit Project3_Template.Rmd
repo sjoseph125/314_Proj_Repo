@@ -33,6 +33,7 @@ library(GGally)
 library(psych)
 library(car)
 library(statsr)
+library (pwr)
 
 #Loading Dataset
 vgs <- read.csv('replaced variables.csv')
@@ -108,9 +109,13 @@ chisq.test(vgs1t)
 
 
 ```{r}
+#copying the table for my variables of choice
 vgs_copy <- select(vgs, Rating, Global_Sales)
+
+#removing NA values
 vgs_annova <- na.omit(vgs_copy)
 
+#post transformation
 table(vgs_annova$Rating)
 
 vgs_annova <- mutate(vgs_annova, Rating = ifelse(Rating == "E" | Rating == "E10+" | Rating == "EC" | Rating == "K-A", "E",
@@ -119,7 +124,24 @@ vgs_annova <- mutate(vgs_annova, Rating = ifelse(Rating == "E" | Rating == "E10+
                                                                ifelse(Rating == "T", "T",
                                                                       Rating)))))
 
+#check
 table(vgs_annova$Rating)
+
+#checking conditions
+leveneTest(vgs_annova$Global_Sales ~ vgs_annova$Rating)
+
+tapply(vgs_annova$Global_Sales, vgs_annova$Rating, qqnorm)
+
+aov_test <- aov(data = vgs_annova, vgs_annova$Global_Sales ~ vgs_annova$Rating)
+summary(aov_test)
+
+TukeyHSD(aov_test)
+
+ef <- effectsize::eta_squared(aov_test)
+ef$Eta2
+
+pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 2961), power = NULL)
+
 ```
 
 
