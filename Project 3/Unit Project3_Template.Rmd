@@ -147,7 +147,7 @@ pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 29
 
 
 
-### Analysis 3: Simple Linear Regression - EU Sales vs JP Sales
+### Analysis 3: Simple Linear Regression - EU Sales and JP Sales
 #### Analyst: Joey diFrancesco
 
 []
