@@ -153,16 +153,19 @@ pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 29
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
+
 describe(vgs$EU_Sales)
 describe(vgs$JP_Sales)
 
 ggplot(vgs, aes(x = JP_Sales, y = EU_Sales )) + xlim(0, 15) +
     geom_point() + geom_smooth(method=lm, se=FALSE)
 
+
 cor(vgs$JP_Sales, vgs$EU_Sales)
 
 mod <- lm(vgs$EU_Sales ~ vgs$JP_Sales)
 summary(mod)
+coef(mod)
 ```
 
 
