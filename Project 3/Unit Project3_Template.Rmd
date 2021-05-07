@@ -165,7 +165,6 @@ cor(vgs$JP_Sales, vgs$EU_Sales)
 
 mod <- lm(vgs$EU_Sales ~ vgs$JP_Sales)
 summary(mod)
-coef(mod)
 ```
 
 
