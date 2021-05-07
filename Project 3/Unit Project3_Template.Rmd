@@ -160,12 +160,54 @@ pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 29
 
 
 ### Analysis 4:[Name/description]
-#### Analyst:[Name of Team Member]
+#### Analyst:[Christopher Aguila]
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
-```{r}
+# Clearly identify explanatory and response variables
 
+# State the conditions and tell how each condition is met. Refer to any calculations, visualizations, or diagnostics that you use to justify this.
+
+# State the null and alternative hypothesis of this analysis in words in the context of your data.
+
+# Write the regression model. Interpret each estimated coefficient, if appropriate.
+
+#In your written analysis, properly identify the test statistis and p-value for each coefficient, and state whether or not you reject the null hypothesis.
+
+# State and interpret the adjusted R^2, then give a summary conclusion in the context of your data.
+
+#Discuss any limitations to your analysis due to conditions not met, sampling bias, outliers in the data, or other issues that you notice. Reference your output from the R analysis as needed.
+
+```{r}
+#Viewing the main features of the dataset
+dim (vgs)
+names (vgs)
+str (vgs)
+head (vgs)
+tail (vgs)
+
+#Summary stats using Psych
+describe(vgs$EU_Sales)
+
+# Select and identify quantitative response variable and at least two explanatory quantitative variables: The response variable will be EU sales while the explanatory variables will be NA sales and JP sales.
+
+# Boxplot and histogram of EU Sales
+ggplot(data=vgs) +
+  geom_boxplot(mapping=aes(x=EU_Sales))
+ggplot(data = vgs) +
+  geom_histogram(mapping = aes(x = EU_Sales), binwidth = 0.5)
+
+# Show any transformations done to your variables.
+vgs_comp <- vgs[complete.cases(vgs), ]
+
+#Create table of correlation and covariance for your variables.
+res <- vgs_comp %>%
+  select_if(is.numeric)%>%
+  cor()
+
+# Determine whether your data meets the conditions for a linear model. State the conditions for a linear model. Perform all appropriate diagnostics. Show any calculations or visualizations that you use to justify this.
+
+#Run The regression.
 ```
 
 
