@@ -218,6 +218,8 @@ res <- vgs_comp %>%
 # Determine whether your data meets the conditions for a linear model. State the conditions for a linear model. Perform all appropriate diagnostics. Show any calculations or visualizations that you use to justify this.
 
 #Run The regression.
+model <- lm(EU_Sales ~ NA_Sales + JP_Sales, data = vgs_comp)
+summary(model)
 ```
 
 
