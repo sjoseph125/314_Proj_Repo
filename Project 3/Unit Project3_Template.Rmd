@@ -68,36 +68,59 @@ vgs <- filter(vgs, Name != "")
 ### Analysis 1: [Name/Description]
 #### Analyst:[Name of Team Member]
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+In this analysis, I am testing to see whether there is an association between the age of the intended audience of a video game and the platform it is released on. I have simplified the originally reported ESRB ratings for the video games in the data set by fitting them into new categories labeled as "kids", "teens", and "adults" in order to make the results of the test more readable and practical. I've also removed all observations where the rating is listed as "RP", or Rating Pending. The most appropriate statistical test to measure the association between two categorical variables is a Chi-square test of independence.
+
+In order to determine if the Chi-square test was a viable option to analyze this data, I first needed to make sure the data meets all of the conditions. The data meets the condition of independence as each observation is independent of all the others. Some data wrangling was required to make this true. I chose to completely remove all observations which had duplicate names. Some of these entries seemed to be completely erroneous, where there were two or more entires which were exact copies. It's also common for single games to be released on multiple platforms. I have eliminated all cases where this is true, opting instead to keep only those which were intended for only one platform. The data meet the sample size condition as each category has more than 5 cases. In this case, the condition is far exceeded, with the lowest number of cases being 54 (PC games made for an adult audience) and the highest being 2176 (handheld games made for kids). The degrees of freedom is determined by the number of rows and columns in our data set, with the formula (R-1)x(C-1). The data frame consists of 3 rows and 3 columns, therefore the degrees of freedom for this test is 4. This number is corroborated by the results of our chi-squared test in R.
+
+The null hypothesis states that the rating and platform are independent - the rating does not vary by platform, and our alternative hypothesis is that rating and platform are dependent - the rating does vary by platform. After running the Chi-squared test on our contingency table, I got a p-value of p < 2.2e-16, which is very large, and therefore we will not reject the null hypothesis. Based on our test, there is no evidence that the rating of a video game has any effect on the platform that it gets released on.
 
 ```{r}
-# new working dataset
-vgs1 <- vgs
+# copy to a new working dataset
+vgs_chi <- vgs
+
+# drop observations from the new dataset that have a duplicate name
+vgs_chi <- vgs_chi[!(duplicated(vgs_chi$Name) | duplicated(vgs_chi$Name, fromLast = TRUE)), ]
+
+# filter out all obvservations which show a rating on RP, and drop that level entirely
+vgs_chi <- filter(vgs_chi, Rating != "RP") %>% droplevels()
+
+# select only rating and platform from the dataset
+vgs_chi <- select(vgs_chi, Rating, Platform)
+
+vgs_chi <- na.omit(vgs_chi)
+
 # combine all platforms relating console products 
-levels(vgs1$Platform)[levels(vgs1$Platform)%in%c("Wii", "NES", "X360", "PS3", "PS2", "SNES", "PS4", "N64", "PS", "XB", "2600", "XOne", "WiiU", "GC", "GEN", "DC", "SAT", "SCD", "NG", "TG16", "3DO", "PCFX")] <- "console"
+levels(vgs_chi$Platform)[levels(vgs_chi$Platform)%in%c("Wii", "NES", "X360", "PS3", "PS2", "SNES", "PS4", "N64", "PS", "XB", "2600", "XOne", "WiiU", "GC", "GEN", "DC", "SAT", "SCD", "NG", "TG16", "3DO", "PCFX")] <- "console"
 
 # combine all platforms relating handheld products
-levels(vgs1$Platform)[levels(vgs1$Platform)%in%c("GB", "DS", "GBA", "3DS", "PSP", "PSV", "WS", "GG")] <- "handheld"
+levels(vgs_chi$Platform)[levels(vgs_chi$Platform)%in%c("GB", "DS", "GBA", "3DS", "PSP", "PSV", "WS", "GG")] <- "handheld"
 
-# check levels
-levels(vgs1$Platform)
+# combine all ratings intended for ages under 18
+levels(vgs_chi$Rating)[levels(vgs_chi$Rating)%in%c("E", "E10+", "K-A", "EC")] <- "kids"
 
-# # combine all ratings intended for ages under 18
-levels(vgs1$Rating)[levels(vgs1$Rating)%in%c("E", "E10+", "K-A", "EC", "T")] <- "kids"
+# combine all ratings intended for teens
+levels(vgs_chi$Rating)[levels(vgs_chi$Rating)%in%c("T")] <- "teens"
 
 # combine all ratings intended for ages over 18
-levels(vgs1$Rating)[levels(vgs1$Rating)%in%c("M", "AO")] <- "adults"
+levels(vgs_chi$Rating)[levels(vgs_chi$Rating)%in%c("M", "AO")] <- "adults"
 
-levels(vgs1$Rating)
+# view / inspect dataframe
+view(vgs_chi)
+unique(vgs_chi)
+summary(vgs_chi)
 
 # contingency table with new variables
-vgs1t <- table(vgs1$Rating, vgs1$Platform)
-  
-vgs1t
+chi_t <- table(vgs_chi$Rating, vgs_chi$Platform)
 
-mosaicplot(vgs1t, main = "Intended Audience Accross Platforms",ylab = "Platform", xlab = "Age Groups")
+# check contingency table
+chi_t
 
-chisq.test(vgs1t)
+# create mosaic plot using the data in the contingency table
+mosaicplot(chi_t, main = "Intended Audience Accross Platforms",ylab = "Platform", xlab = "Age Groups")
+
+# perform chi-squared test
+chisq.test(chi_t)
+
 ```
 
 
