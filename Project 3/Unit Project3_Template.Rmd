@@ -170,24 +170,30 @@ pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 29
 
 
 
-### Analysis 3:[Name/Description]
-#### Analyst:[Name of Team Member]
+### Analysis 3: Simple Linear Regression - EU_Sales and JP_Sales
+#### Analyst: Joey diFrancesco
 
 [Put text of analysis here and add as many code chunks and text sections as you need.]
 
 ```{r}
-
+#Retrieving summary stats of both variables
 describe(vgs$EU_Sales)
 describe(vgs$JP_Sales)
 
-ggplot(vgs, aes(x = JP_Sales, y = EU_Sales )) + xlim(0, 15) +
+#Scatterplot of both variables and adding a regression line to the plot
+ggplot(vgs, aes(x = JP_Sales, y = EU_Sales )) + xlim(0, 12) + ylim(0,15) +
     geom_point() + geom_smooth(method=lm, se=FALSE)
 
+#Finding the correlation of the two variables with a 95% confidence level
+cor.test(vgs$JP_Sales, vgs$EU_Sales, method = "pearson", conf.level = 0.95)
 
-cor(vgs$JP_Sales, vgs$EU_Sales)
-
+#Running the regression and calling the linear model mod
 mod <- lm(vgs$EU_Sales ~ vgs$JP_Sales)
 summary(mod)
+
+#Determining with plots whether the data meets the conditions for a linear model
+par(mfrow=c(2,2))
+plot(mod)
 ```
 
 
