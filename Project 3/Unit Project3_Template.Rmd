@@ -127,7 +127,7 @@ To perform an ANNOVA test, first a Levene test is ran to check the homogeniety o
 
 **Alternative Hypothesis:** The mean is different for at least one of the treatment groups.
 
-After running the ANNOVA test the p-value is 2.53e-16 and the f-statistic is 0.007859374. Since the p-value is very small we will reject the null hypothesis. This means that there is strongly significant evidence of a difference between the different ratings and global sales.When running the power for each of these groups, they are all extremely low. For the everyone, mature, RP, and teen groups they have powers of: 0.14069527, 0.07371485, 0.05002809, 0.09672216. In order to obtain a power of at least 0.8 and avoid a type II error the groups should be 44126.79 total sales. The powers of these categories are so low due to the f-statistic being so low. In this case running a parametric test will be better since these variables did not meet the criteria for an ANNOVA test. 
+After running the ANNOVA test the p-value is 2.53e-16 and the f-statistic is 0.007859374. Since the p-value is very small we will reject the null hypothesis. This means that there is strongly significant evidence of a difference between the different ratings and global sales. There is a difference between the M and E groups and the T and M groups. When running the power for each of these groups, they are all extremely low. For the everyone, mature, RP, and teen groups they have powers of: 0.14069527, 0.07371485, 0.05002809, 0.09672216. In order to obtain a power of at least 0.8 and avoid a type II error the groups should be 44126.79 total sales. The powers of these categories are so low due to the f-statistic being so low. In this case running a parametric test will be better since these variables did not meet the criteria for an ANNOVA test. 
 
 
 ```{r}
@@ -154,14 +154,18 @@ leveneTest(vgs_annova$Global_Sales ~ vgs_annova$Rating)
 
 tapply(vgs_annova$Global_Sales, vgs_annova$Rating, qqnorm)
 
+#ANNOVA test
 aov_test <- aov(data = vgs_annova, vgs_annova$Global_Sales ~ vgs_annova$Rating)
 summary(aov_test)
 
+#check differences between groups
 TukeyHSD(aov_test)
 
+#getting the f-stat
 ef <- effectsize::eta_squared(aov_test)
 ef$Eta2
 
+#power tests
 pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 2961), power = NULL)
 
 pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = NULL, power = .8)
