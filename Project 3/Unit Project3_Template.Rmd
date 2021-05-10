@@ -152,7 +152,7 @@ table(vgs_annova$Rating)
 #checking conditions
 leveneTest(vgs_annova$Global_Sales ~ vgs_annova$Rating)
 
-tapply(vgs_annova$Global_Sales, vgs_annova$Rating, qqnorm)
+invisible(tapply(vgs_annova$Global_Sales, vgs_annova$Rating, qqnorm))
 
 #ANNOVA test
 aov_test <- aov(data = vgs_annova, vgs_annova$Global_Sales ~ vgs_annova$Rating)
