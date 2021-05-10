@@ -1,9 +1,10 @@
 ---
-title: '[Unit Project 3 Template/Name your project here]'
-authors: '[Team Number and Names]'
-date: 
-output: html_document
-
+title: 'Unit Project 3: Analysis Using simple and multiple linear regression '
+authors: 'Samson Joseph, Sean Simmons, Daniel Gurwah, Joseph Difrancesco'
+date: "5/10/2021"
+output:
+  html_document:
+    df_print: paged
 ---
 ## Delete lines 8 - 16 section before submitting the file
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to use as a template for your Unit 2 Project. 
@@ -15,11 +16,11 @@ When you save the notebook, an HTML file containing the code and output will be 
 You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HTML file.
 ## Delete lines 8-16 before submitting the file.
 
-**To:** [Add Name here and remove brackets]
+**To:** DR. Random<br>
 
-**From:**[Add Team Members names here and remove brackets ]
+**From:** Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco<br>
 
-**Subject:** [Add Subject here and remove brackets]
+**Subject:**Analysis of Video Games Dataset Using Linear Regression 
 
 
 ## Background
@@ -260,57 +261,73 @@ summary(model)
 
 
 
-### Analysis 5:[Name/description]
+### Analysis 5: Multiple Regression with EU_Sales, NA_Sales and Platform
 #### Analyst: Samson Joseph
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+The response variable used in this analysis is EU_Sales. And the explanatory variables are NA_Sales, the quantitative variable, and Platform, the categorical variable. The Platform variable has been simplified to only include the PS4 and XOne values. The conditions for conducting the regression model are discussed below, close to the necessary graphs to visualize the information. The null hypothesis would be getting correlation coefficients that are equal to 0. The alternative hypothesis would be getting correlation coefficients that are not equal to 0. After running the model, we get an estimated coefficient of 0.79071 for NA_Sales and -0.33644 for Platform. Both coefficients are meaningfully different from 0. And their respective p-values are considerably less than any significance level. Additionally, with an F statistic of 236.1 and a p-value which is considerably less than .05, we can confidently reject the null hypothesis. The resulting adjusted R^2 value is only .516 which is not very high. This tells us that only 51.6% of the variation in the EU_Sales data can be explained by the regression model. The other 48.4% of the variation is a result of variables not considered for the regression or is a result of pure randomness. The linear equation EU_Sales = 0.22654 + 0.79071 * NA_Sales -.33644 * (1 for XOne and 0 for PS4) can be explained as such. This model can predict that for every x amount of sales in North America, sales in the EU will be .79071 of the x plus .22654. Additionally if the game is for XOne, the sales will be .3364 less and if the game is for PS4 then the sales will be .3364 more. With an R^2 of .516, this method can only explain 51.6% of the variation, so other variables must be considered for a better linear model.
 
-```{r}
-describe(vgs$EU_Sales)
+In conclusion, the conditions for linear modeling is mostly met, and the resulting p-values for the estimated coefficients and F statistic are all well below that of any significance level. Therefore, the null hypothesis of zero correlation between the variables EU_Sales, NA_Sales, and Platform is rejected.
+
+
+
+```{r warning=FALSE}
+
 NA_sales_A5 <- data.frame(NA_Sales=vgs$NA_Sales[!is.na(vgs$NA_Sales)])
 EU_Sales_A5 <- data.frame(EU_Sales=vgs$EU_Sales[!is.na(vgs$EU_Sales)])
 
-ggplot(EU_Sales_A5,aes(x='',EU_Sales)) + geom_boxplot() + ylim(0,.42) +ylab('EU Sales')
+#Showing the distribution of EU_Sales
+#A limit of .27 was applied to the y axis of the boxplot and the x axis of the histogram to the data without the outliers. 0.27 was calculated by multiplying the IQR of EU_Sales, which is .18 by 1.5.
 
-ggplot(EU_Sales_A5, aes(x=EU_Sales)) + geom_histogram(binwidth = .01) + xlim(.01,1)
+ggplot(EU_Sales_A5,aes(x='',EU_Sales)) + geom_boxplot() + ylim(0,.27) +ylab('EU Sales')
+
+ggplot(EU_Sales_A5, aes(x=EU_Sales)) + geom_histogram(binwidth = .01) + xlim(.01,.27)
+
+describe(vgs$EU_Sales)
+```
 
 
-# vgs_comp <- na.omit(vgs)
-# res <- data.frame( vgs_comp %>%
-#   select_if(is.numeric) %>%
-#   cor())
-# res
-# 
-# model <- lm(EU_Sales ~ NA_Sales, data = vgs_comp)
-# summary(model)
+The graph and table below help visualize the linearity of the variables, EU_Sales and NA_Sales. With a correlation of .68, they do have a linear relationship.
 
-qqnorm(model$residuals)
-qqline(model$residuals)
-
+```{r warning=FALSE}
+#Created a new DataFrame that includes EU_Sales, the response variable, and NA_Sales and Platform, the explanatory variables.
 A5 <- vgs %>%
   select(EU_Sales, NA_Sales, Platform) %>%
   filter(Platform == "PS4" | Platform == "XOne")
 A5<-na.omit(A5)
 
+#Making a scatter plot to compare EU_Sales with NA_Sales in order to visualize any trends.
+plot(A5$EU_Sales~A5$NA_Sales, xlim=c(0,.47))
+plot(A5$EU_Sales~A5$NA_Sales, xlim=c(0,.47), ylim=c(0,.27)) #.27
 
+#Creating a DataFrame to analyze the correlation of EU_Sales and NA_Sales
 corT <- data.frame(A5 %>%
   select_if(is.numeric) %>%
   cor())
 corT
-A5 %>%
-  select_if(is.numeric) %>%
-  ggpairs()
 
+```
+The first and second graph in below section give visualizations on the residuals of the model. The first plot shows a good scatter among the residuals. Although not the ideal spread, it is enough to satisfy the condition of the residual independence. In order to check the normality of the residuals we will use a histogram and a qqnorm graph. The histogram shows a bimodal distribution and the qqnorm is relatively satisfactory, with some quirkiness at the ends. The bimodal distribution is not too severe, but is mostly satisfactory. But homoscedasticity of the residuals is a bit more questionable as there is a meaningful amount below the 0 line than above.
+
+```{r warning=FALSE}
+
+#Creating a multi-linear regression model
 Mlm <- model <- lm(EU_Sales ~ NA_Sales + Platform, data = A5)
 summary(Mlm)
 
-plot(Mlm$residuals ~ A5$EU_Sales,xlim=c(0,.5))
+#Plotting the residuals to visualize their variability
+plot(Mlm$residuals ~ A5$EU_Sales,xlim=c(0,.5), ylim=c(-1,.5))
 abline(h = 0, lty = 3)
+hist(Mlm$residuals, breaks = 50)
+
+qqnorm(Mlm$residuals)
+qqline(Mlm$residuals)
+
 leveragePlots(Mlm, xlim=c(-.5,.5))
 
 sigma(Mlm)/mean(A5$EU_Sales)
 
 anova(Mlm)
+
 ```
 
 
