@@ -126,10 +126,18 @@ chisq.test(chi_t)
 
 
 
-### Analysis 2: Name/description]
-#### Analyst:[Name of Team Member]
+### Analysis 2: Analysis of Variance Test
+#### Analyst:Daniel Gurwah
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+In this analysis I will be performing an Analysis of Variance (ANNOVA) test to find if there is a difference in the means across the groups in the ratings category. I will be using the global sales variable as the quantitative or the response variable and the ratings will be used as the categorical or explanatory variable. To use the ratings I combined some of the categories in order to have less overlap of similar factors. I combined all of the everyone categories together, all of the adult categories together, and left everything else how they were. 
+
+To perform an ANNOVA test, first a Levene test is ran to check the homogeniety of the variance between treatment groups and a QQNorm graph is ran to check the normality of each treatment group. For a Levene test the null hypothesis is there is no difference between treatment groups. The p-value of 9.527e-15 is very small and therefore we reject the null hypothesis. This means that there are differences between the treatment groups. After running the qqnorm graphs, it can be seen that in all of the groups besides one they are reflective of an exponential type of curve. This means that there is most likely not normality in the groups. 
+
+**Null Hypothesis:** The mean between all treatment groups are the same. 
+
+**Alternative Hypothesis:** The mean is different for at least one of the treatment groups.
+
+After running the ANNOVA test the p-value is 2.53e-16 and the f-statistic is 0.007859374. Since the p-value is very small we will reject the null hypothesis. This means that there is strongly significant evidence of a difference between the different ratings and global sales.When running the power for each of these groups, they are all extremely low. For the everyone, mature, RP, and teen groups they have powers of: 0.14069527, 0.07371485, 0.05002809, 0.09672216. In order to obtain a power of at least 0.8 and avoid a type II error the groups should be 44126.79 total sales. The powers of these categories are so low due to the f-statistic being so low. In this case running a parametric test will be better since these variables did not meet the criteria for an ANNOVA test. 
 
 
 ```{r}
@@ -165,6 +173,8 @@ ef <- effectsize::eta_squared(aov_test)
 ef$Eta2
 
 pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 2961), power = NULL)
+
+pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = NULL, power = .8)
 
 ```
 
