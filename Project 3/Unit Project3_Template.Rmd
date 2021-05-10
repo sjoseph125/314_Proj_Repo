@@ -6,25 +6,15 @@ output:
   html_document:
     df_print: paged
 ---
-## Delete lines 8 - 16 section before submitting the file
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook to use as a template for your Unit 2 Project. 
-
-Add new chunks by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
-
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).  You may need to Knit to HTML, using the KNIT button on the toolbar. 
-
-You will submit both the saved R Markdown file (.RMD) WITH A NEW NAME and the HTML file.
-## Delete lines 8-16 before submitting the file.
-
 **To:** DR. Random<br>
 
-**From:** Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco<br>
+**From:** Samson Joseph, Sean Simmons, Daniel Gurwah, Christopher Aguila, Joseph Difrancesco <br>
 
 **Subject:**Analysis of Video Games Dataset Using Linear Regression 
 
 
 ## Background
-[Provide a brief (one to two paragraphs, please, that 1) recaps the key features of your dataset, 2) states your task as a follow-up of your previous data exploration.  You may use a table to summarize your dataset features, if you wish.]
+Our dataset comes from an aggregation of data collected from Metacritic and VGCharts which provides detailed information about 16,719 video games released between the years 1986 and 2016, such as the developer of the game, the platform it was released on, the sales by several defined regions, as well as the reception from critics and users. When we were initially given this dataset, our first task was to explore and clean the data. Our most significant discovery was that there are many missing observations within the data, which we needed to take into consideration when conducting our analyses. On our previous foray into the video games dataset, we used the z-test and t-test to conduct inferential analysis on select variables within the data. These analyses gave us insight into how effective our data might be in making inferences about the population of interest. Our new objective is to search for correlations in the data to gain a deeper understanding for how the variables in our dataset relate to one another. 
 ```{r setup, include =FALSE}
 #Loading Libraries
 #install.packages('GGally')
@@ -67,7 +57,7 @@ vgs <- filter(vgs, Name != "")
 ## Analyses
 
 ### Analysis 1: [Name/Description]
-#### Analyst:[Name of Team Member]
+#### Analyst: Sean Simmons
 
 In this analysis, I am testing to see whether there is an association between the age of the intended audience of a video game and the platform it is released on. I have simplified the originally reported ESRB ratings for the video games in the data set by fitting them into new categories labeled as "kids", "teens", and "adults" in order to make the results of the test more readable and practical. I've also removed all observations where the rating is listed as "RP", or Rating Pending. The most appropriate statistical test to measure the association between two categorical variables is a Chi-square test of independence.
 
@@ -127,7 +117,7 @@ chisq.test(chi_t)
 
 
 ### Analysis 2: Analysis of Variance Test
-#### Analyst:Daniel Gurwah
+#### Analyst: Daniel Gurwah
 
 In this analysis I will be performing an Analysis of Variance (ANNOVA) test to find if there is a difference in the means across the groups in the ratings category. I will be using the global sales variable as the quantitative or the response variable and the ratings will be used as the categorical or explanatory variable. To use the ratings I combined some of the categories in order to have less overlap of similar factors. I combined all of the everyone categories together, all of the adult categories together, and left everything else how they were. 
 
@@ -215,8 +205,8 @@ plot(mod)
 
 
 
-### Analysis 4:[Multiple Linear Regression with EU_Sales, NA_Sales, and JP_Sales]
-#### Analyst:[Christopher Aguila]
+### Analysis 4: Multiple Linear Regression with EU_Sales, NA_Sales, and JP_Sales
+#### Analyst: Christopher Aguila
 
 The quantitative response variable used in this analysis is EU_sales, and the
 quantitative explanatory variables are NA_SALES and JP_Sales. The null
@@ -365,7 +355,12 @@ anova(Mlm)
 
 ## Recommendations
 
-[Add text section with your recommendations here. In this section, you will briefly  summarize the conclusions of your estimates and tests. What statistically significant findings did you have?  What limitations are there in your findings?  Discuss if/how this is relevant in the context of your data – does it give us new insights ? Help us to better understand some phenomenon?  Or not?]
+For analysis 1, we used a chi-square test to see if there is an association between the age of the intended audience of a video game and the platform it is released on using the “Platform” and “Rating” variables. After Running the test, we found that we could not reject the null hypothesis, that there is no correlation between these two variables, so there is no evidence that the rating of a video game has any effect on the platform that the game is released on. 
+In analysis 2, we used an ANOVA test to compare treatment groups in Ratings by their global sales. After performing the test, we rejected the null hypothesis and saw that there were differences between at least one group. After running a Tukey test, it would appear that there is a difference between the M and E groups and the T and M groups. 
+For analysis 3, we found there was a weak correlation between European sales and Japan sales, but not enough to have any significant impact. The adjusted R2 value was 0.232 which is very low on the scale. More data points and better quantitative variables should be used to obtain a higher R2 value. In the end we concluded that Japan sales do not have any effect on European sales.
+In analysis 4, there was some correlation found between European sales and Japanese and American sales. This is relevant in the context of our data as it shows that the sales in some regions have influence on the sales in other regions. There is room for more insight given that other categorical variables in our dataset could also correlate with sales.
+For analysis 5 we used the NA_Sales and Platform variables as predictors for the EU_Sales variable. We did find some correlation between the variables, but some of the conditions for linear regression were barely met. Although there were significant estimated coefficients, the resulting adjusted R2 was only .516. Meaning that only 51.6% of the variation in EU_Sales can be explained by the model. It would have been better if we had access to a more variety of variables, which could have resulted in a higher R2 value.
+
 
 ## Reflections
-[Add text section on your reflections about unit projects. Be sure to address each of the prompts on the instruction sheet.]
+The unit projects reinforced some of the key concepts taught in previous statistics classes, while also introducing new and more advanced techniques - all within the context of R. We all saw the greatest development in our knowledge of R. In R, we learned how to take our understanding of statistical methods, and apply them to real data. Using the statistical methods we learned during class on the dataset for the projects helped us get a more deep understanding of the statistical principles. Implementing the principles allowed us to learn how to effectively and accurately use them and explain the resulting test statistics, p-values, etc. in a manner that is insightful.We learned how to properly evaluate the data to make sure the conditions for various tests are met. And even if they don’t, we learned methods for compensating for the conditions that are not met.We learned a lot on how to use R and R studio on top of familiarizing ourselves with the statistical principles taught in class. We also learned how to properly engineer the data to fit into the format we needed them to be in. We also became quite familiar with popular packages for R such as ggplot and tidyverse, which were crucial in our analyses. At first, the dataset was quite overwhelming to deal with. It had many missing values and it was hard to filter data and get statistical information like this. This made it difficult to explore the data and we had to rely on code to show us what was happening inside the dataset. For example, we couldn’t use the view function to see all the data because it was so large. For each project, setting up the variables was also a challenge and usually required some research on how to edit variables to do x or y. 
