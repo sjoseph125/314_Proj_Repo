@@ -184,7 +184,13 @@ pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = NULL, power = .8)
 ### Analysis 3: Simple Linear Regression - EU_Sales and JP_Sales
 #### Analyst: Joey diFrancesco
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+For this analysis, I am testing to see if Japan sales have any affect or impact on European sales. I chose EU_Sales to be my quantitative response variable and JP_Sales to be my quantitative explanatory variable. To do this analysis, Simple Linear Regression using two quantitative variables is what I found to be best fit. 
+
+To proceed with linear regression, all conditions must be identified and met. The first condition is for the Y values or "errors" to be independent. To see if this is met, we must look at the Residual plot. The red line is fairly straight with no pattern and abnormalities, therefore the condition is met. The next condition is for the relationship between the explanatory and response variables must be linear. In our scatter plot, the data can be shown using a straight line, therefore the relationship is linear and the condition is met. For our last condition, the data must be normally distributed. We must look at our Normal Q-Q plot and see that the line associated with the y values are on a slight diagonal and straight. This shows that what we expect the residual errors should be are normally distributed, therefore the condition is met. 
+
+The null hypothesis for this analysis would be that the response variable is not independent and is affected by the explanatory variable, or EU_Sales is affected by JP_Sales. The alternative hypothesis would be that the response variable is independent of the explanatory variable, or EU_Sales is not affected by JP_Sales. My test statistic is t = 27.691, and p-value < 2.2e-16. Considering the p-value is extremely small and less than 0.05, we reject the null hypothesis. The R^2 value I got is 0.232 or 23.2%. This value is on the lower side, and can mean not many data points fall within the results of the line formed by the regression equation. In our case, it is more difficult to predict human behavior (buying video games) so therefore the R^2 value will be low. 
+
+In conclusion, my analysis shows that Japan sales have little to no affect on European sales considering the null hypothesis was rejected.
 
 ```{r}
 #Retrieving summary stats of both variables
@@ -203,42 +209,49 @@ mod <- lm(vgs$EU_Sales ~ vgs$JP_Sales)
 summary(mod)
 
 #Determining with plots whether the data meets the conditions for a linear model
-par(mfrow=c(2,2))
 plot(mod)
 ```
 
 
 
 
-### Analysis 4:[Name/description]
+### Analysis 4:[Multiple Linear Regression with EU_Sales, NA_Sales, and JP_Sales]
 #### Analyst:[Christopher Aguila]
 
-[Put text of analysis here and add as many code chunks and text sections as you need.]
+The quantitative response variable used in this analysis is EU_sales, and the
+quantitative explanatory variables are NA_SALES and JP_Sales. The null
+hypothesis of this analysis would be to obtain correlation coefficients equal
+to 0 while the alternative hypothesis of this analysis would be to obtain
+correlation coefficients that are not equal to 0.
 
-# Clearly identify explanatory and response variables
+After running the correlation test and visualizing the trends between the
+response and explanatory variables through the use of scatter plots below, there
+is some linearity present. The scatter plots themselves do not provide much
+insight on the linearity but that is not true about the correlation test.
+The results of the correlation table show a strong correlation between EU_Sales
+and NA_Sales at 0.87 and a moderate correlation between EU_sales and NA_Sales at 0.50. The visualizations after running the regression show a normal distribution
+and some linearity through the histogram and qqnorm plots with the model's
+residuals. This satisfies the conditions of linearity, normality, and equal
+variance for the most part.
 
-# State the conditions and tell how each condition is met. Refer to any calculations, visualizations, or diagnostics that you use to justify this.
+The results of the regression model show an estimated coefficient of 0.57 for
+NA_Sales and an estimated coefficient of 0.34 for JP_Sales. There also is an F-
+statistic of 2788 present. With both of these estimates being considerably
+different than 0, the high F statistic, and p-values for each respective value
+being well below the significance level of 0.05, I can reject the null hypothesis
+in this analysis. 
 
-# State the null and alternative hypothesis of this analysis in words in the context of your data.
+The adjusted R^2 for this analysis is 0.7679 which is moderately high, pointing
+to many data points falling below the regression line equation. Based on all
+these calculations in this analysis, I can conclude that North American sales
+and Japanese sales have somewhat of an effect on European Sales.
 
-# Write the regression model. Interpret each estimated coefficient, if appropriate.
-
-#In your written analysis, properly identify the test statistis and p-value for each coefficient, and state whether or not you reject the null hypothesis.
-
-# State and interpret the adjusted R^2, then give a summary conclusion in the context of your data.
-
-#Discuss any limitations to your analysis due to conditions not met, sampling bias, outliers in the data, or other issues that you notice. Reference your output from the R analysis as needed.
 
 ```{r}
-#Viewing the main features of the dataset
-dim (vgs)
-names (vgs)
-str (vgs)
-head (vgs)
-tail (vgs)
-
-#Summary stats using Psych
+#Summary stats using Psych of specific variables
 describe(vgs$EU_Sales)
+describe(vgs$NA_Sales)
+describe(vgs$JP_Sales)
 
 # Select and identify quantitative response variable and at least two explanatory quantitative variables: The response variable will be EU sales while the explanatory variables will be NA sales and JP sales.
 
@@ -251,16 +264,27 @@ ggplot(data = vgs) +
 # Show any transformations done to your variables.
 vgs_comp <- vgs[complete.cases(vgs), ]
 
+#visualization for trends
+plot(vgs_comp$EU_Sales~vgs_comp$NA_Sales, xlim=c(0,.47), ylim=c(0,.27))
+plot(vgs_comp$EU_Sales~vgs_comp$JP_Sales, xlim=c(0,.47), ylim=c(0,.27))
+
 #Create table of correlation and covariance for your variables.
-res <- vgs_comp %>%
+vgsres <- vgs_comp %>%
   select_if(is.numeric)%>%
   cor()
-
-# Determine whether your data meets the conditions for a linear model. State the conditions for a linear model. Perform all appropriate diagnostics. Show any calculations or visualizations that you use to justify this.
+round(vgsres, 2)
 
 #Run The regression.
 model <- lm(EU_Sales ~ NA_Sales + JP_Sales, data = vgs_comp)
 summary(model)
+
+# Determine whether your data meets the conditions for a linear model. State the conditions for a linear model. Perform all appropriate diagnostics. Show any calculations or visualizations that you use to justify this.
+plot(model$residuals ~ vgs_comp$EU_Sales, xlim=c(0,.5), ylim=c(-1,.5))
+abline(h = 0, lty = 3)
+hist(model$residuals)
+qqnorm(model$residuals)
+qqline(model$residuals)
+
 ```
 
 
