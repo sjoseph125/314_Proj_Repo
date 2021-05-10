@@ -164,14 +164,18 @@ leveneTest(vgs_annova$Global_Sales ~ vgs_annova$Rating)
 
 tapply(vgs_annova$Global_Sales, vgs_annova$Rating, qqnorm)
 
+#ANNOVA test
 aov_test <- aov(data = vgs_annova, vgs_annova$Global_Sales ~ vgs_annova$Rating)
 summary(aov_test)
 
+#check differences between groups
 TukeyHSD(aov_test)
 
+#getting the f-stat
 ef <- effectsize::eta_squared(aov_test)
 ef$Eta2
 
+#power tests
 pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = c(5422, 1564, 3, 2961), power = NULL)
 
 pwr.anova.test(k = 4, sig.level = 0.05, f = 0.007859374, n = NULL, power = .8)
