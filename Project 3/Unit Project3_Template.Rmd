@@ -56,7 +56,7 @@ vgs <- filter(vgs, Name != "")
 
 ## Analyses
 
-### Analysis 1: [Name/Description]
+### Analysis 1: Chi-square Test of Independence
 #### Analyst: Sean Simmons
 
 In this analysis, I am testing to see whether there is an association between the age of the intended audience of a video game and the platform it is released on. I have simplified the originally reported ESRB ratings for the video games in the data set by fitting them into new categories labeled as "kids", "teens", and "adults" in order to make the results of the test more readable and practical. I've also removed all observations where the rating is listed as "RP", or Rating Pending. The most appropriate statistical test to measure the association between two categorical variables is a Chi-square test of independence.
